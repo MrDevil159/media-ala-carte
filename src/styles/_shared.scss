@@ -1,0 +1,89 @@
+// Shared UI components — import this partial wherever these classes are needed.
+// Imported globally via styles.scss so classes are available to all components.
+
+// ─── Badge ───────────────────────────────────────────────────────────────────
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 1rem;
+  border-radius: var(--radius-full);
+  background-color: var(--color-surface-container-high);
+  border: 1px solid rgba(72, 72, 73, 0.15);
+  width: fit-content;
+
+  &.primary__border {
+    border-color: var(--color-primary);
+  }
+}
+
+.badge__text {
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--color-on-surface-variant);
+
+  &.primary__color {
+    color: var(--color-primary);
+  }
+}
+
+.badge__accent {
+  color: var(--color-primary);
+  font-weight: 800;
+}
+
+// ─── Buttons ─────────────────────────────────────────────────────────────────
+.btn-primary {
+  background: linear-gradient(to right, var(--color-primary), var(--color-secondary));
+  color: var(--color-on-primary-fixed);
+  border: none;
+  cursor: pointer;
+  padding: 1rem 2rem;
+  border-radius: var(--radius-full);
+  font-size: 1.125rem;
+  font-weight: 700;
+  box-shadow: 0 10px 15px -3px rgba(255, 139, 154, 0.2);
+  transition: scale 0.4s ease, box-shadow 0.4s ease;
+
+  &:hover {
+    scale: 1.08;
+    box-shadow: 0 20px 40px -6px rgba(255, 139, 154, 0.55);
+  }
+
+  &:active {
+    scale: 0.95;
+  }
+}
+
+.btn-glass {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: rgba(38, 38, 39, 0.4);
+  backdrop-filter: blur(20px);
+  border: 1px solid var(--color-primary);
+  color: #ffffff;
+  cursor: pointer;
+  padding: 1rem 2rem;
+  border-radius: var(--radius-full);
+  font-size: 1.125rem;
+  font-weight: 700;
+  transition: scale 0.4s ease, box-shadow 0.4s ease;
+  justify-content: center;
+
+  .material-symbols-outlined {
+    font-size: 1.25rem;
+    line-height: 1;
+  }
+
+  &:hover {
+    scale: 1.05;
+    box-shadow: 0 10px 30px -6px rgba(255, 139, 154, 0.3);
+  }
+
+  &:active {
+    scale: 0.95;
+  }
+}

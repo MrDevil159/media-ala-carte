@@ -1,0 +1,127 @@
+:host {
+  display: block;
+}
+
+.why-us-section {
+  padding: 4rem 2rem;
+
+  @media (width >= 1024px) {
+    padding: 8rem 2rem;
+  }
+  position: relative;
+  overflow: hidden;
+
+  &__inner {
+    max-width: 80rem;
+    margin-inline: auto;
+  }
+
+  &__grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 5rem;
+    align-items: center;
+
+    @media (width >= 1024px) {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  &__cards {
+    position: relative;
+    order: 2;
+
+    @media (width >= 1024px) {
+      order: 1;
+    }
+  }
+
+  &__cards-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1rem;
+
+    @media (width >= 1024px) {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  &__cards-col {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+
+    @media (width >= 1024px) {
+      &--offset {
+        padding-top: 3rem;
+      }
+    }
+  }
+
+  &__copy {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    order: 1;
+
+    @media (width >= 1024px) {
+      order: 2;
+    }
+  }
+
+  &__heading {
+    font-family: var(--font-headline);
+    font-size: 2.25rem;
+    font-weight: 700;
+    line-height: 1.25;
+
+    @media (width >= 1024px) {
+      font-size: 3rem;
+    }
+  }
+
+  &__heading-accent {
+    color: var(--color-primary);
+    font-style: italic;
+  }
+
+  &__description {
+    font-size: 1.125rem;
+    color: var(--color-on-surface-variant);
+  }
+
+  &__checklist {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  &__checklist-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 1rem;
+  }
+
+  &__check-icon {
+    margin-top: 0.25rem;
+    width: 1.5rem;
+    height: 1.5rem;
+    border-radius: var(--radius-full);
+    background-color: rgba(255, 139, 154, 0.2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    color: var(--color-primary);
+
+    .material-symbols-outlined {
+      font-size: 0.875rem;
+      font-variation-settings: 'FILL' 1;
+    }
+  }
+
+  &__checklist-text {
+    color: var(--color-on-surface);
+  }
+}

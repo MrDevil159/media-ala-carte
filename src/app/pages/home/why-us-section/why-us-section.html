@@ -1,0 +1,44 @@
+<section class="why-us-section">
+  <div class="why-us-section__inner">
+    <div class="why-us-section__grid">
+      <!-- Feature cards grid -->
+      <div class="why-us-section__cards">
+        <div class="why-us-section__cards-grid">
+          <div class="why-us-section__cards-col why-us-section__cards-col--offset">
+            @for (feature of features().slice(0, 2); track feature.title) {
+              <app-feature-card [card]="feature" />
+            }
+          </div>
+          <div class="why-us-section__cards-col">
+            @for (feature of features().slice(2); track feature.title) {
+              <app-feature-card [card]="feature" />
+            }
+          </div>
+        </div>
+      </div>
+
+      <!-- Copy -->
+      <div class="why-us-section__copy">
+        <h2 id="why-us-heading" class="why-us-section__heading">
+          Our All Solution for <br />
+          <span class="why-us-section__heading-accent">Smarter Media Buying</span>
+        </h2>
+
+        <p class="why-us-section__description">
+          We simplify media buying with data, automation, and collaboration to maximize ROI
+        </p>
+
+        <ul class="why-us-section__checklist">
+          @for (item of checklist(); track item.text) {
+            <li class="why-us-section__checklist-item">
+              <div class="why-us-section__check-icon">
+                <span class="material-symbols-outlined">check</span>
+              </div>
+              <p class="why-us-section__checklist-text">{{ item.text }}</p>
+            </li>
+          }
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>

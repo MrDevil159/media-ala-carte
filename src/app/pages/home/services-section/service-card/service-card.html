@@ -1,0 +1,26 @@
+<article class="service-card" [class.service-card--active]="active()">
+  <img [alt]="card().imageAlt"
+       [src]="card().imageUrl"
+       [style.object-position]="card().imagePosition ?? 'center'"
+       class="service-card__image" />
+
+  <div class="service-card__gradient"></div>
+
+  <div class="service-card__content">
+    <span [class]="'service-card__badge service-card__badge--' + card().badgeColor">
+      {{ card().badge }}
+    </span>
+    <h3 class="service-card__title">{{ card().title }}</h3>
+    <p class="service-card__description">{{ card().description }}</p>
+    <button type="button" [class]="'service-card__cta service-card__cta--' + card().accentColor">
+      Learn More
+      <span class="material-symbols-outlined service-card__cta-icon">
+        arrow_forward
+      </span>
+    </button>
+  </div>
+
+  <div class="service-card__collapsed-label">
+    <span>{{ card().title }}</span>
+  </div>
+</article>

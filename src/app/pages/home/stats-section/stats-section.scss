@@ -1,0 +1,129 @@
+:host {
+  display: block;
+}
+
+.stats-section {
+  padding-block-start: 4rem;
+  padding-block-end: 0;
+
+  @media (width >= 1024px) {
+    padding-block-start: 6rem;
+  }
+  background-color: var(--color-surface);
+
+  &__inner {
+    max-width: 80rem;
+    margin-inline: auto;
+    padding-inline: 2rem;
+  }
+
+  &__card {
+    background-color: var(--color-surface-container-high);
+    border-radius: 3rem;
+    padding: 3rem;
+    position: relative;
+    overflow: hidden;
+
+    @media (width >= 1024px) {
+      padding: 5rem;
+    }
+  }
+
+  &__gradient {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 33.333%;
+    height: 100%;
+    background: linear-gradient(to left, rgba(255, 139, 154, 0.1), transparent);
+  }
+
+  &__grid {
+    position: relative;
+    z-index: 10;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 4rem;
+    align-items: center;
+
+    @media (width >= 1024px) {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  &__heading {
+    font-family: var(--font-headline);
+    font-size: 2.25rem;
+    font-weight: 700;
+    margin-bottom: 1.5rem;
+
+    @media (width >= 1024px) {
+      font-size: 3rem;
+    }
+  }
+
+  // Space the shared badge above the heading
+  .badge {
+    margin-bottom: 1.5rem;
+  }
+
+  &__heading-accent {
+    color: var(--color-primary);
+  }
+
+  &__subheading {
+    color: var(--color-on-surface-variant);
+    font-size: 1.125rem;
+  }
+
+  &__stat-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+
+    @media (width >= 640px) {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  &__stat {
+    background-color: var(--color-surface-container-lowest);
+    padding: 2rem;
+    border-radius: 1.5rem;
+    border: 1px solid rgba(72, 72, 73, 0.1);
+
+    &--full {
+      @media (width >= 640px) {
+        grid-column: span 2;
+      }
+    }
+  }
+
+  &__stat-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  &__value {
+    font-family: var(--font-headline);
+    font-size: 2.25rem;
+    font-weight: 800;
+    margin-bottom: 0.5rem;
+
+    &--primary { color: var(--color-primary); }
+    &--secondary { color: var(--color-primary); }
+  }
+
+  &__icon {
+    font-size: 3rem !important;
+  }
+
+  &__label {
+    font-size: 0.875rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--color-on-surface-variant);
+  }
+}

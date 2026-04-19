@@ -1,0 +1,108 @@
+:host {
+  display: block;
+}
+
+@keyframes orbit-spin {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
+
+@keyframes counter-orbit-spin {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(-360deg); }
+}
+
+@keyframes orbit-float {
+  0%, 100% { transform: translateY(0); }
+  50%       { transform: translateY(-8px); }
+}
+
+// Clipping container — center of all orbits sits at top: 0, left: 50%.
+// overflow: hidden reveals only the bottom semicircle.
+.orbit-clipper {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+}
+
+// Visual arc ring: center the full circle on the orbit pivot (top: 0, left: 50%)
+// so only the bottom semicircle is revealed by the clipper's overflow: hidden.
+.orbit-track {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  border: 1px solid rgba(255, 255, 255, 0.07);
+  pointer-events: none;
+}
+
+// Zero-size pivot at the orbit center — rotates carrying all items with it.
+.orbit-rotator {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  width: 0;
+  height: 0;
+  animation: orbit-spin var(--dur, 50s) linear infinite;
+
+  @media (prefers-reduced-motion: reduce) {
+    animation: none;
+  }
+}
+
+// Anchor point for each item; translate() moves it to its orbit position.
+.orbit-item {
+  position: absolute;
+
+  &--avatar {
+    // Offset by half avatar size (3.5rem / 2 = 1.75rem) to center the image on the point.
+    top: -1.75rem;
+    left: -1.75rem;
+  }
+
+  &--dot {
+    // Offset by half dot size (0.45rem / 2 ≈ 0.225rem).
+    top: -0.225rem;
+    left: -0.225rem;
+  }
+}
+
+.orbit-avatar {
+  width: 3.5rem;
+  height: 3.5rem;
+  animation: orbit-float 5s ease-in-out infinite;
+
+  @media (prefers-reduced-motion: reduce) {
+    animation: none;
+  }
+}
+
+.orbit-img {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid rgba(255, 255, 255, 0.14);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.55);
+  // Counter-rotate so the avatar portrait stays upright as the ring spins.
+  animation: counter-orbit-spin var(--dur, 50s) linear infinite;
+
+  @media (prefers-reduced-motion: reduce) {
+    animation: none;
+  }
+}
+
+.orbit-dot {
+  width: 0.45rem;
+  height: 0.45rem;
+  border-radius: 50%;
+  background-color: rgba(255, 255, 255, 0.8);
+  box-shadow: 0 0 8px 2px rgba(255, 255, 255, 0.35);
+  // Counter-rotate to keep the dot at its apparent position.
+  animation: counter-orbit-spin var(--dur, 50s) linear infinite;
+
+  @media (prefers-reduced-motion: reduce) {
+    animation: none;
+  }
+}

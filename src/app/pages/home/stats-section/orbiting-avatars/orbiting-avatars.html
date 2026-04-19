@@ -1,0 +1,41 @@
+<div
+  class="orbit-clipper"
+  [style.height.rem]="clipperHeightRem()"
+>
+  @for (ring of processedRings(); track ring.radiusRem) {
+    <!-- Visible arc ring -->
+    <div
+      class="orbit-track"
+      [style.width.rem]="ring.radiusRem * 2"
+      [style.height.rem]="ring.radiusRem * 2"
+    ></div>
+
+    <!-- Rotating pivot (zero-size, positioned at center top) -->
+    <div
+      class="orbit-rotator"
+      [style.--dur]="ring.durationS + 's'"
+    >
+      @for (item of ring.placedItems; track $index) {
+        <div
+          class="orbit-item"
+          [class.orbit-item--avatar]="item.type === 'avatar'"
+          [class.orbit-item--dot]="item.type === 'dot'"
+          [style.transform]="'translate(' + item.x + 'px, ' + item.y + 'px)'"
+        >
+          @if (item.type === 'avatar') {
+            <div class="orbit-avatar" [style.animation-delay]="item.floatDelay">
+              <img
+                class="orbit-img"
+                [src]="item.src"
+                [alt]="item.alt"
+                [style.--dur]="ring.durationS + 's'"
+              />
+            </div>
+          } @else {
+            <div class="orbit-dot" [style.--dur]="ring.durationS + 's'"></div>
+          }
+        </div>
+      }
+    </div>
+  }
+</div>

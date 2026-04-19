@@ -1,0 +1,30 @@
+<section class="services-section">
+  <div class="services-section__inner">
+    <!-- Section header -->
+    <div class="services-section__header">
+      <div class="services-section__header-copy">
+        <div class="services-section__label">
+          <span class="material-symbols-outlined">auto_awesome</span>
+          <span class="services-section__label-text">Precision Tools</span>
+        </div>
+        <h2 id="services-heading" class="services-section__heading">Our Services</h2>
+      </div>
+      <p class="services-section__description">
+        Media alacarte provide ground breaking features and services available to the advertising industry with improved workflow across all media types, from planning and buying, tracking, accounting and reconciliation.
+      </p>
+    </div>
+
+    <!-- Cards grid -->
+    <div class="services-section__grid">
+      @for (service of services(); track service.title; let i = $index) {
+        <div
+          class="services-section__grid-item"
+          [class.services-section__grid-item--active]="activeIndex() === i"
+          (mouseenter)="setActive(i)"
+        >
+          <app-service-card [card]="service" [active]="isActive()(i)" />
+        </div>
+      }
+    </div>
+  </div>
+</section>

@@ -1,0 +1,60 @@
+<footer class="site-footer">
+  <div class="footer-grid">
+    <!-- Brand + social -->
+    <div class="footer-brand">
+      <a href="/">
+        <img ngSrc="/assets/logo.webp" alt="Media Ala Carte" height="40" width="160" />
+      </a>
+      <p class="footer-brand__description">The Future Media Hub</p>
+      <div class="footer-brand__social">
+        @for (link of socialLinks(); track link.label) {
+          <a class="footer-brand__social-link"
+             [href]="link.href">
+            <span class="material-symbols-outlined">{{ socialIcons[link.label] }}</span>
+          </a>
+        }
+      </div>
+    </div>
+
+    <!-- Link columns -->
+    @for (column of columns(); track column.heading) {
+      <div class="footer-column">
+        <h4 class="footer-column__heading">{{ column.heading }}</h4>
+        <ul class="footer-column__list">
+          @for (link of column.links; track link.label) {
+            <li>
+              <a class="footer-column__link" [href]="link.href">
+                {{ link.label }}
+              </a>
+            </li>
+          }
+        </ul>
+      </div>
+    }
+
+    <!-- Contact Us -->
+    <div class="footer-contact">
+      <h4 class="footer-column__heading">Contact Us</h4>
+      <address class="footer-contact__address">
+        <div class="footer-contact__row">
+          <span class="material-symbols-outlined footer-contact__icon footer-contact__icon--primary">location_on</span>
+          <div>
+            @for (line of contactAddress(); track line) {
+              <p>{{ line }}</p>
+            }
+          </div>
+        </div>
+        <div class="footer-contact__row">
+          <span class="material-symbols-outlined footer-contact__icon footer-contact__icon--primary">mail</span>
+          <a class="footer-contact__email" [href]="'mailto:' + contactEmail()">{{ contactEmail() }}</a>
+        </div>
+      </address>
+    </div>
+  </div>
+
+  <div class="footer-bottom">
+    <p class="footer-bottom__copy">
+      &copy; {{currentYear}} Media Alacarte Agency FZ LLC. - All Rights Reserved.
+    </p>
+  </div>
+</footer>

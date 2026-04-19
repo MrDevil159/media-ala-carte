@@ -1,0 +1,136 @@
+:host {
+  display: block;
+  height: 100%;
+
+  @media (width < 768px) {
+    height: auto;
+  }
+}
+
+.service-card {
+  position: relative;
+  border-radius: 2rem;
+  overflow: hidden;
+  background-color: var(--color-surface-container);
+  height: 100%;
+  min-height: 500px;
+  cursor: pointer;
+
+  &__image {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0.25;
+    transition: opacity 0.5s ease, transform 0.7s ease;
+  }
+
+  &--active {
+    .service-card__image {
+      opacity: 0.5;
+      transform: scale(1.05);
+    }
+  }
+
+  &__gradient {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to top, var(--color-background), rgba(14, 14, 15, 0.4), transparent);
+  }
+
+  &__content {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    padding: 2rem;
+    width: 100%;
+    opacity: 0;
+    transform: translateY(0.5rem);
+    transition: opacity 0.3s ease, transform 0.3s ease;
+    transition-delay: 0s;
+    pointer-events: none;
+  }
+
+  &--active &__content {
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: auto;
+    transition-delay: 0.45s;
+  }
+
+  &__collapsed-label {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) rotate(90deg);
+    background-color: var(--color-primary);
+    color: var(--color-on-primary-fixed);
+    padding: 0.6rem 1.5rem;
+    border-radius: var(--radius-full);
+    font-weight: 700;
+    font-size: 1rem;
+    white-space: nowrap;
+    pointer-events: none;
+    opacity: 1;
+    transition: opacity 0.35s ease;
+  }
+
+  &--active &__collapsed-label {
+    opacity: 0;
+  }
+
+  &__badge {
+    display: inline-block;
+    padding: 0.25rem 0.75rem;
+    font-size: 10px;
+    font-weight: 700;
+    border-radius: var(--radius-full);
+    margin-bottom: 1rem;
+
+    &--primary {
+      background-color: var(--color-primary);
+      color: var(--color-on-primary-fixed);
+    }
+
+    &--secondary {
+      background-color: var(--color-secondary);
+      color: var(--color-on-primary-fixed);
+    }
+  }
+
+  &__title {
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+  }
+
+  &__description {
+    color: var(--color-on-surface-variant);
+    font-size: 0.875rem;
+    margin-bottom: 1.5rem;
+  }
+
+  &__cta {
+    background: none;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-weight: 700;
+    font-size: 1rem;
+    padding: 0;
+
+    &--primary { color: var(--color-primary); }
+    &--secondary { color: var(--color-primary); }
+
+    &:hover .service-card__cta-icon {
+      transform: translateX(0.5rem);
+    }
+  }
+
+  &__cta-icon {
+    transition: transform 0.2s ease;
+  }
+}

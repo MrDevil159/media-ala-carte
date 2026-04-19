@@ -1,1 +1,66 @@
-/* You can add global styles to this file, and also import other style files */
+@use './styles/shared';
+@import url("https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&family=Manrope:wght@400;500;600&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap");
+
+:root {
+  // Background & Surface
+  --color-background: #0e0e0f;
+  --color-surface: #0e0e0f;
+  --color-surface-variant: #262627;
+  --color-surface-container-lowest: #000000;
+  --color-surface-container-low: #131314;
+  --color-surface-container: #19191b;
+  --color-surface-container-high: #1f1f21;
+  --color-surface-container-highest: #262627;
+
+  // On-colors
+  --color-on-surface: #ffffff;
+  --color-on-surface-variant: #adaaab;
+  --color-on-primary-fixed: #f1f1f1;
+
+  // Primary
+  --color-primary: #cf3d46;
+  --color-primary-dim: #ff6e84;
+
+  // Secondary
+  --color-secondary: #ca2d51;
+
+  // Typography
+  --font-headline: 'Plus Jakarta Sans', sans-serif;
+  --font-body: 'Manrope', sans-serif;
+
+  // Border radius
+  --radius-lg: 0.5rem;
+  --radius-full: 9999px;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background-color: var(--color-background);
+  color: var(--color-on-surface);
+  font-family: var(--font-body);
+  line-height: 1.5;
+  overflow-x: hidden;
+
+  ::selection {
+    background-color: var(--color-primary);
+    color: var(--color-on-primary-fixed);
+  }
+}
+
+.material-symbols-outlined {
+  font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+}
+
+.glass-card {
+  background: rgba(38, 38, 39, 0.4);
+  backdrop-filter: blur(20px);
+}
+

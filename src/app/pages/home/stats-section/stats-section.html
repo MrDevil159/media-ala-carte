@@ -1,0 +1,47 @@
+<section class="stats-section">
+  <div class="stats-section__inner">
+    <div class="stats-section__card">
+      <div class="stats-section__gradient"></div>
+
+      <div class="stats-section__grid">
+        <!-- Copy -->
+        <div>
+          <div class="badge primary__border">
+            <span class="badge__text primary__color">Powering Collaboration Across Media</span>
+          </div>
+          <h2 id="stats-heading" class="stats-section__heading">
+            Collaborate. <br /><span class="stats-section__heading-accent">Elevate.</span> Succeed.
+          </h2>
+          <p class="stats-section__subheading">
+            Our growth is fueled by the success of our partners.
+            Join the network that's redefining the digital media standard.
+          </p>
+        </div>
+
+        <!-- Stat cards -->
+        <div class="stats-section__stat-grid">
+          @for (stat of stats(); track stat.label) {
+            <div class="stats-section__stat" [class.stats-section__stat--full]="stat.fullWidth">
+              @if (stat.icon) {
+                <div class="stats-section__stat-inner">
+                  <div>
+                    <p [class]="'stats-section__value stats-section__value--' + stat.colorClass">{{ stat.value }}</p>
+                    <p class="stats-section__label">{{ stat.label }}</p>
+                  </div>
+                  <span [class]="'material-symbols-outlined stats-section__icon stats-section__value--' + stat.colorClass">
+                    {{ stat.icon }}
+                  </span>
+                </div>
+              } @else {
+                <p [class]="'stats-section__value stats-section__value--' + stat.colorClass">{{ stat.value }}</p>
+                <p class="stats-section__label">{{ stat.label }}</p>
+              }
+            </div>
+          }
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <app-orbiting-avatars />
+</section>

@@ -1,0 +1,33 @@
+<app-hero-section />
+
+@defer (on viewport) {
+  <app-services-section />
+} @loading (after 100ms; minimum 400ms) {
+  <app-section-spinner />
+} @placeholder {
+  <div style="min-height: 600px"></div>
+}
+
+@defer (on viewport) {
+  <app-why-us-section />
+} @loading (after 100ms; minimum 400ms) {
+  <app-section-spinner />
+} @placeholder {
+  <div style="min-height: 700px"></div>
+}
+
+@defer (on viewport) {
+  <app-stats-section />
+} @loading (after 100ms; minimum 400ms) {
+  <app-section-spinner />
+} @placeholder {
+  <div style="min-height: 500px"></div>
+}
+
+@defer (on viewport) {
+  <app-cta-section />
+} @loading (after 100ms; minimum 400ms) {
+  <app-section-spinner />
+} @placeholder {
+  <div style="min-height: 400px"></div>
+}

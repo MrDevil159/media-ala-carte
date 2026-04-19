@@ -1,0 +1,10 @@
+<div class="feature-card">
+  <div class="feature-card__arrow-badge">
+    <span class="material-symbols-outlined">arrow_outward</span>
+  </div>
+  <span [class]="'material-symbols-outlined feature-card__icon feature-card__icon--' + card().iconColor">
+    {{ card().icon }}
+  </span>
+  <h4 class="feature-card__title">{{ card().title }}</h4>
+  <p class="feature-card__description">{{ card().description }}</p>
+</div>

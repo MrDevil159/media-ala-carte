@@ -1,0 +1,65 @@
+:host {
+  display: block;
+}
+
+.feature-card {
+  background-color: var(--color-surface-container);
+  padding: 2rem;
+  border-radius: 1.5rem;
+  border: 1px solid rgba(72, 72, 73, 0.1);
+  transition: border-color 0.2s ease;
+  cursor: pointer;
+  position: relative;
+
+  &:hover {
+    border-color: rgba(255, 139, 154, 0.3);
+
+    .feature-card__arrow-badge {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+
+  &__arrow-badge {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    width: 2rem;
+    height: 2rem;
+    border-radius: var(--radius-full);
+    background: linear-gradient(135deg, var(--color-primary), var(--color-secondary));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transform: scale(0.7);
+    transition: opacity 0.2s ease, transform 0.2s ease;
+
+    .material-symbols-outlined {
+      font-size: 1rem !important;
+      color: #fff;
+    }
+  }
+
+  &__icon {
+    font-size: 2.25rem !important;
+    display: block;
+    margin-bottom: 1rem;
+
+    &--primary { color: var(--color-primary); }
+    &--secondary { color: var(--color-primary); }
+    &--primary-dim { color: var(--color-primary-dim); }
+  }
+
+  &__title {
+    font-size: 1.125rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+  }
+
+  &__description {
+    color: var(--color-on-surface-variant);
+    font-size: 0.875rem;
+    line-height: 1.625;
+  }
+}

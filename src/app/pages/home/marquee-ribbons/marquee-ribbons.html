@@ -1,0 +1,25 @@
+<section class="marquee-ribbons">
+  <!-- Top ribbon — scrolls left -->
+  <div class="marquee-ribbon marquee-ribbon--top">
+    <div class="marquee-ribbon__track">
+      @for (item of topTrack(); track $index) {
+        <span class="marquee-ribbon__item">{{ item }}</span>
+      }
+      @for (item of topTrack(); track $index) {
+        <span class="marquee-ribbon__item">{{ item }}</span>
+      }
+    </div>
+  </div>
+
+  <!-- Bottom ribbon — scrolls right -->
+  <div class="marquee-ribbon marquee-ribbon--bottom">
+    <div class="marquee-ribbon__track marquee-ribbon__track--reverse">
+      @for (item of bottomTrack(); track $index) {
+        <span class="marquee-ribbon__item">{{ item }}</span>
+      }
+      @for (item of bottomTrack(); track $index) {
+        <span class="marquee-ribbon__item">{{ item }}</span>
+      }
+    </div>
+  </div>
+</section>

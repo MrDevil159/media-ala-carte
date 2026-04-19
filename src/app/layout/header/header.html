@@ -1,0 +1,42 @@
+<header class="site-header">
+  <nav class="header-nav">
+    <a href="/">
+      <img ngSrc="/assets/logo.webp" alt="Media Ala Carte" height="40" width="160" priority />
+    </a>
+
+    <div class="header-nav__links">
+      @for (link of navLinks(); track link.label) {
+        <a [href]="link.href"
+           class="nav-link"
+           [class.nav-link--active]="link.isActive">
+          {{ link.label }}
+        </a>
+      }
+    </div>
+
+    <div class="header-nav__actions">
+      <button type="button" class="btn-login">Login</button>
+      <button type="button" class="btn-demo">Request a Demo</button>
+    </div>
+
+    <button type="button"
+            class="mobile-menu-toggle"
+            (click)="toggleMobileMenu()">
+      <span class="material-symbols-outlined">
+        {{ mobileMenuOpen() ? 'close' : 'menu' }}
+      </span>
+    </button>
+  </nav>
+
+  @if (mobileMenuOpen()) {
+    <nav id="mobile-nav" class="mobile-nav">
+      @for (link of navLinks(); track link.label) {
+        <a [href]="link.href"
+           class="mobile-nav__link"
+           [class.mobile-nav__link--active]="link.isActive">
+          {{ link.label }}
+        </a>
+      }
+    </nav>
+  }
+</header>
