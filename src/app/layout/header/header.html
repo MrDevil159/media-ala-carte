@@ -1,12 +1,12 @@
 <header class="site-header">
   <nav class="header-nav">
-    <a href="/">
-      <img ngSrc="/assets/logo.webp" alt="Media Ala Carte" height="40" width="160" priority />
+    <a routerLink="/">
+      <img ngSrc="/assets/logo.webp" alt="Media Ala Carte" height="44" width="160" priority />
     </a>
 
     <div class="header-nav__links">
       @for (link of navLinks(); track link.label) {
-        <a [href]="link.href"
+        <a [routerLink]="link.path"
            class="nav-link"
            [class.nav-link--active]="link.isActive">
           {{ link.label }}
@@ -31,7 +31,7 @@
   @if (mobileMenuOpen()) {
     <nav id="mobile-nav" class="mobile-nav">
       @for (link of navLinks(); track link.label) {
-        <a [href]="link.href"
+        <a [routerLink]="link.path"
            class="mobile-nav__link"
            [class.mobile-nav__link--active]="link.isActive">
           {{ link.label }}

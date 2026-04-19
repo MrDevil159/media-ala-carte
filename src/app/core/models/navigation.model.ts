@@ -1,6 +1,7 @@
 export interface NavLink {
   readonly label: string;
-  readonly href: string;
+  readonly path?: string;
+  readonly url?: string;
   readonly isActive?: boolean;
 }
 

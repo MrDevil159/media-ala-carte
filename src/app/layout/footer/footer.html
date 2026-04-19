@@ -2,14 +2,13 @@
   <div class="footer-grid">
     <!-- Brand + social -->
     <div class="footer-brand">
-      <a href="/">
-        <img ngSrc="/assets/logo.webp" alt="Media Ala Carte" height="40" width="160" />
+      <a style="cursor:pointer" (click)="scrollToTop()">
+        <img ngSrc="/assets/logo.webp" alt="Media Ala Carte" height="44" width="160" />
       </a>
       <p class="footer-brand__description">The Future Media Hub</p>
       <div class="footer-brand__social">
         @for (link of socialLinks(); track link.label) {
-          <a class="footer-brand__social-link"
-             [href]="link.href">
+          <a class="footer-brand__social-link" [href]="link.url">
             <span class="material-symbols-outlined">{{ socialIcons[link.label] }}</span>
           </a>
         }
@@ -23,7 +22,7 @@
         <ul class="footer-column__list">
           @for (link of column.links; track link.label) {
             <li>
-              <a class="footer-column__link" [href]="link.href">
+              <a class="footer-column__link" [routerLink]="link.path">
                 {{ link.label }}
               </a>
             </li>

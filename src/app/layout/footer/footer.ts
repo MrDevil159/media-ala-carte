@@ -1,10 +1,11 @@
 import { ChangeDetectionStrategy, Component, signal } from '@angular/core';
 import { NgOptimizedImage } from '@angular/common';
+import { RouterLink } from '@angular/router';
 import { FooterColumn, NavLink } from '../../core/models/navigation.model';
 
 @Component({
   selector: 'app-footer',
-  imports: [NgOptimizedImage],
+  imports: [NgOptimizedImage, RouterLink],
   templateUrl: './footer.html',
   styleUrl: './footer.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -14,19 +15,19 @@ export class Footer {
     {
       heading: 'Product',
       links: [
-        { label: 'The Platform', href: '#' },
-        { label: 'Features', href: '#' },
-        { label: 'Benefits', href: '#' },
-        { label: 'Request a Demo', href: '#' }
+        { label: 'The Platform', path: '/' },
+        { label: 'Features', path: '/' },
+        { label: 'Benefits', path: '/' },
+        { label: 'Request a Demo', path: '/' }
       ],
     },
     {
       heading: 'Resources / Legal',
       links: [
-        { label: 'About Us', href: '#' },
-        { label: 'Privacy Policy', href: '#' },
-        { label: 'Terms of Service', href: '#' },
-        { label: 'Cookie Policy', href: '#' },
+        { label: 'About Us', path: '/' },
+        { label: 'Privacy Policy', path: '/' },
+        { label: 'Terms of Service', path: '/' },
+        { label: 'Cookie Policy', path: '/' },
       ],
     },
   ]);
@@ -40,9 +41,9 @@ export class Footer {
   protected readonly contactEmail = signal('admin@mediaalacarte.net');
 
   protected readonly socialLinks = signal<NavLink[]>([
-    { label: 'Website', href: '#' },
-    { label: 'Email', href: '#' },
-    { label: 'Community', href: '#' },
+    { label: 'Website', url: '/' },
+    { label: 'Email', url: '/' },
+    { label: 'Community', url: '/' },
   ]);
 
   protected readonly socialIcons: Record<string, string> = {
@@ -52,4 +53,8 @@ export class Footer {
   };
 
   protected readonly currentYear = new Date().getFullYear();
+
+  protected scrollToTop(): void {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
 }

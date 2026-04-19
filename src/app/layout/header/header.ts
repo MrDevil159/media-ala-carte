@@ -1,5 +1,6 @@
 import { ChangeDetectionStrategy, Component, signal } from '@angular/core';
 import { NgOptimizedImage } from '@angular/common';
+import { RouterLink } from '@angular/router';
 import { NavLink } from '../../core/models/navigation.model';
 
 @Component({
@@ -7,15 +8,15 @@ import { NavLink } from '../../core/models/navigation.model';
   templateUrl: './header.html',
   styleUrl: './header.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [NgOptimizedImage],
+  imports: [NgOptimizedImage, RouterLink],
 })
 export class Header {
   protected readonly navLinks = signal<NavLink[]>([
-    { label: 'The Platform', href: '#', isActive: true },
-    { label: 'Features', href: '#' },
-    { label: 'Benefits', href: '#' },
-    { label: 'About Us', href: '#' },
-    { label: 'Contact Us', href: '#' },
+    { label: 'The Platform', path: '/', isActive: true },
+    { label: 'Features', path: '/' },
+    { label: 'Benefits', path: '/' },
+    { label: 'About Us', path: '/' },
+    { label: 'Contact Us', path: '/' },
   ]);
 
   protected readonly mobileMenuOpen = signal(false);
