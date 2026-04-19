@@ -25,6 +25,20 @@
   // Secondary
   --color-secondary: #ca2d51;
 
+  // Semantic tokens (replaces hardcoded rgba values)
+  --color-header-bg: rgba(14, 14, 15, 0.8);
+  --color-glass-bg: rgba(38, 38, 39, 0.4);
+  --color-border: rgba(72, 72, 73, 0.15);
+  --color-border-subtle: rgba(255, 255, 255, 0.05);
+  --color-text-muted: rgba(255, 255, 255, 0.8);
+  --color-muted: rgba(255, 255, 255, 0.4);
+  --color-gradient-mid: rgba(14, 14, 15, 0.4);
+  --color-orbit-ring: rgba(255, 255, 255, 0.07);
+  --color-orbit-ring-bold: rgba(255, 255, 255, 0.14);
+  --color-orbit-dot: rgba(255, 255, 255, 0.8);
+  --color-orbit-dot-glow: rgba(255, 255, 255, 0.35);
+  --color-logo-filter: brightness(0) invert(0.75);
+
   // Typography
   --font-headline: 'Plus Jakarta Sans', sans-serif;
   --font-body: 'Manrope', sans-serif;
@@ -32,6 +46,36 @@
   // Border radius
   --radius-lg: 0.5rem;
   --radius-full: 9999px;
+}
+
+[data-theme="light"] {
+  --color-background: #f4f4f6;
+  --color-surface: #f4f4f6;
+  --color-surface-variant: #e2e2e5;
+  --color-surface-container-lowest: #ffffff;
+  --color-surface-container-low: #eeeeF1;
+  --color-surface-container: #e6e6ea;
+  --color-surface-container-high: #dadade;
+  --color-surface-container-highest: #ceced2;
+
+  --color-on-surface: #111112;
+  --color-on-surface-variant: #56565a;
+  --color-on-primary-fixed: #ffffff;
+
+  --color-primary-dim: #e8526a;
+
+  --color-header-bg: rgba(244, 244, 246, 0.85);
+  --color-glass-bg: rgba(255, 255, 255, 0.55);
+  --color-border: rgba(0, 0, 0, 0.1);
+  --color-border-subtle: rgba(0, 0, 0, 0.07);
+  --color-text-muted: rgba(17, 17, 19, 0.8);
+  --color-muted: rgba(0, 0, 0, 0.4);
+  --color-gradient-mid: rgba(244, 244, 246, 0.5);
+  --color-orbit-ring: rgba(0, 0, 0, 0.07);
+  --color-orbit-ring-bold: rgba(0, 0, 0, 0.1);
+  --color-orbit-dot: rgba(17, 17, 19, 0.7);
+  --color-orbit-dot-glow: rgba(0, 0, 0, 0.15);
+  --color-logo-filter: brightness(0) invert(0);
 }
 
 *,
@@ -60,7 +104,7 @@ body {
 }
 
 .glass-card {
-  background: rgba(38, 38, 39, 0.4);
+  background: var(--color-glass-bg);
   backdrop-filter: blur(20px);
 }
 

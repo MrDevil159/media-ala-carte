@@ -1,7 +1,8 @@
-import { ChangeDetectionStrategy, Component, signal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject, signal } from '@angular/core';
 import { NgOptimizedImage } from '@angular/common';
 import { RouterLink } from '@angular/router';
 import { NavLink } from '../../core/models/navigation.model';
+import { ThemeService } from '../../core/services/theme.service';
 
 @Component({
   selector: 'app-header',
@@ -11,6 +12,8 @@ import { NavLink } from '../../core/models/navigation.model';
   imports: [NgOptimizedImage, RouterLink],
 })
 export class Header {
+  protected readonly theme = inject(ThemeService);
+
   protected readonly navLinks = signal<NavLink[]>([
     { label: 'The Platform', path: '/', isActive: true },
     { label: 'Features', path: '/' },

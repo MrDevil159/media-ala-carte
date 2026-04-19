@@ -6,7 +6,7 @@
   background-color: var(--color-surface-container);
   padding: 2rem;
   border-radius: 1.5rem;
-  border: 1px solid rgba(72, 72, 73, 0.1);
+  border: 1px solid var(--color-border);
   transition: border-color 0.2s ease;
   cursor: pointer;
   position: relative;
@@ -37,7 +37,7 @@
 
     .material-symbols-outlined {
       font-size: 1rem !important;
-      color: #fff;
+      color: var(--color-on-primary-fixed);
     }
   }
 

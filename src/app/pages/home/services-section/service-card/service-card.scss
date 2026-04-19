@@ -36,7 +36,7 @@
   &__gradient {
     position: absolute;
     inset: 0;
-    background: linear-gradient(to top, var(--color-background), rgba(14, 14, 15, 0.4), transparent);
+    background: linear-gradient(to top, var(--color-background), var(--color-gradient-mid), transparent);
   }
 
   &__content {

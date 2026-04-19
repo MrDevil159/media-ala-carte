@@ -90,7 +90,7 @@
     background-color: var(--color-surface-container-lowest);
     padding: 2rem;
     border-radius: 1.5rem;
-    border: 1px solid rgba(72, 72, 73, 0.1);
+    border: 1px solid var(--color-border);
 
     &--full {
       @media (width >= 640px) {

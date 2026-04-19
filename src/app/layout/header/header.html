@@ -15,6 +15,11 @@
     </div>
 
     <div class="header-nav__actions">
+      <button type="button" class="btn-theme-toggle" (click)="theme.toggle()">
+        <span class="material-symbols-outlined">
+          {{ theme.isDark() ? 'light_mode' : 'dark_mode' }}
+        </span>
+      </button>
       <button type="button" class="btn-login">Login</button>
       <button type="button" class="btn-demo">Request a Demo</button>
     </div>
@@ -37,6 +42,14 @@
           {{ link.label }}
         </a>
       }
+      <div class="mobile-nav__footer">
+        <button type="button" class="mobile-nav__theme-toggle" (click)="theme.toggle()">
+          <span class="material-symbols-outlined">
+            {{ theme.isDark() ? 'light_mode' : 'dark_mode' }}
+          </span>
+          {{ theme.isDark() ? 'Light Mode' : 'Dark Mode' }}
+        </button>
+      </div>
     </nav>
   }
 </header>
