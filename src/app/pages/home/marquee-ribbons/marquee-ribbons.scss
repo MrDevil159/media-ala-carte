@@ -20,21 +20,21 @@
     top: 40%;
     opacity: 0.85;
     // Shallower angle on mobile to avoid large gaps
-    transform: translateX(-50%) rotate(-4deg);
+    transform: translateX(-50%) rotate(-5deg);
     z-index: 1;
 
     @media (width >= 640px) {
-      transform: translateX(-50%) rotate(-3deg);
+      transform: translateX(-50%) rotate(-5deg);
     }
   }
 
   &--bottom {
     bottom: 30%;
-    transform: translateX(-50%) rotate(3deg);
+    transform: translateX(-50%) rotate(5deg);
     z-index: 2;
 
     @media (width >= 640px) {
-      transform: translateX(-50%) rotate(2deg);
+      transform: translateX(-50%) rotate(4deg);
     }
   }
 
