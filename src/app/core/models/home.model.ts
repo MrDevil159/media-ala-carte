@@ -14,6 +14,7 @@ export interface FeatureCard {
   readonly iconColor: 'primary' | 'secondary' | 'primary-dim';
   readonly title: string;
   readonly description: string;
+  readonly path?: string;
 }
 
 export interface StatItem {

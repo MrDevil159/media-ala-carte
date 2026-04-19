@@ -16,24 +16,28 @@ export class WhyUsSection {
       iconColor: 'primary',
       title: 'Campaign Planning',
       description: 'Plan and optimize your ad campaigns with datadriven insights and seamless collaboration for maximum impact.',
+      path: '/'
     },
     {
       icon: 'shopping_cart',
       iconColor: 'primary',
       title: 'Media Buying',
       description: 'Effortlessly book media slots with AI-powered automation, ensuring cost efficiency and better reach.',
+      path: '/'
     },
     {
       icon: 'rocket_launch',
       iconColor: 'primary',
       title: 'Ad Distribution',
       description: 'Distribute ads across multiple channels while ensuring precise targeting and real-time tracking.',
+      path: '/'
     },
     {
       icon: 'insights',
       iconColor: 'primary',
       title: 'Performance Analytics',
       description: 'Gain actionable insights with real-time performance tracking to maximize your ROI and refine future strategies..',
+      path: '/'
     },
   ]);
 
