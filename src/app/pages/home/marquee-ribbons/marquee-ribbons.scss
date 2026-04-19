@@ -13,12 +13,12 @@
   width: 200vw;
   left: 50%;
   overflow: hidden;
-  background: linear-gradient(to right, var(--color-primary), var(--color-secondary));
+  background: radial-gradient(var(--color-primary), var(--color-secondary));
   padding: clamp(0.6rem, 1.5vw, 1rem) 0;
 
   &--top {
     top: 40%;
-    opacity: 0.85;
+    opacity: 0.65;
     // Shallower angle on mobile to avoid large gaps
     transform: translateX(-50%) rotate(-5deg);
     z-index: 1;
