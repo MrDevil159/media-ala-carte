@@ -22,36 +22,26 @@
     height: 28rem;
     border-radius: var(--radius-full);
     filter: blur(90px);
-    opacity: 0.15;
-    transition: filter 0.3s ease, opacity 0.3s ease, scale 0.3s ease;
+    opacity: 0.22;
 
     &--primary {
-      top: 20%;
-      left: 15%;
+      top: 5%;
+      left: -8rem;
       background-color: var(--color-primary);
       animation: glow-float-a 12s ease-in-out infinite;
-      translate: var(--glow-a-x, 0px) var(--glow-a-y, 0px);
     }
 
     &--secondary {
-      bottom: 20%;
-      right: 15%;
+      bottom: 5%;
+      right: -8rem;
       background-color: var(--color-secondary);
       animation: glow-float-b 15s ease-in-out infinite;
-      translate: var(--glow-b-x, 0px) var(--glow-b-y, 0px);
     }
   }
 
-  &.mouse-active .hero-section__glow {
-    filter: blur(50px);
-    opacity: 0.4;
-  }
-
-  &.mouse-down .hero-section__glow {
-    filter: blur(25px);
-    opacity: 0.65;
-    scale: 1.4;
-  }
+  // ── Mouse-reactive glow states (commented out — use with rAF loop in .ts) ──
+  // &.mouse-active .hero-section__glow { filter: blur(50px); opacity: 0.4; }
+  // &.mouse-down .hero-section__glow   { filter: blur(25px); opacity: 0.65; scale: 1.4; }
 
   &__inner {
     max-width: 80rem;
@@ -210,18 +200,17 @@
 
 @keyframes glow-float-a {
   0%   { transform: translate(0, 0); }
-  20%  { transform: translate(-12rem, -8rem); }
-  45%  { transform: translate(-18rem, 6rem); }
-  65%  { transform: translate(-8rem, 12rem); }
-  80%  { transform: translate(-20rem, -4rem); }
+  25%  { transform: translate(3rem, 4rem); }
+  50%  { transform: translate(-2rem, 6rem); }
+  75%  { transform: translate(4rem, 2rem); }
   100% { transform: translate(0, 0); }
 }
 
 @keyframes glow-float-b {
   0%   { transform: translate(0, 0); }
-  25%  { transform: translate(14rem, -10rem); }
-  50%  { transform: translate(20rem, 6rem); }
-  75%  { transform: translate(10rem, 14rem); }
+  30%  { transform: translate(-4rem, -3rem); }
+  55%  { transform: translate(2rem, -5rem); }
+  80%  { transform: translate(-3rem, -2rem); }
   100% { transform: translate(0, 0); }
 }
 
