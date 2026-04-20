@@ -10,6 +10,12 @@
   background-color: var(--color-header-bg);
   backdrop-filter: blur(12px);
   box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+  border-bottom: 1px solid transparent;
+  transition: border-bottom-color 0.3s ease;
+
+  &--scrolled {
+    border-bottom-color: var(--color-border);
+  }
 }
 
 .header-nav {
@@ -96,9 +102,33 @@
   padding: 0.25rem;
   border-radius: var(--radius-full);
   transition: color 0.2s ease;
+  position: relative;
+  overflow: visible;
 
   &:hover {
     color: var(--color-primary);
+  }
+
+  /* The particle burst pseudo-element */
+  &::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    pointer-events: none;
+    opacity: 0;
+  }
+
+  &.is-bursting::after {
+    animation: theme-particle-burst 0.55s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+  }
+
+  &__icon--spin {
+    animation: theme-icon-spin 0.45s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
   }
 }
 
@@ -156,6 +186,7 @@
   display: flex;
   flex-direction: column;
   gap: 1rem;
+  animation: nav-slide-down 0.25s ease-out;
 
   @media (width >= 1020px) {
     display: none;
@@ -202,5 +233,63 @@
     &:hover {
       color: var(--color-primary);
     }
+  }
+}
+
+@keyframes nav-slide-down {
+  from { opacity: 0; transform: translateY(-8px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .mobile-nav {
+    animation: none;
+  }
+}
+
+/*
+ * 8 box-shadow "dots" start piled at centre (0,0) then fly out in 8 directions.
+ * Two alternating colours (primary / secondary) for a confetti feel.
+ */
+@keyframes theme-particle-burst {
+  0% {
+    opacity: 1;
+    box-shadow:
+      0    0   0 3px var(--color-primary),
+      0    0   0 3px var(--color-secondary),
+      0    0   0 3px var(--color-primary),
+      0    0   0 3px var(--color-secondary),
+      0    0   0 3px var(--color-primary),
+      0    0   0 3px var(--color-secondary),
+      0    0   0 3px var(--color-primary),
+      0    0   0 3px var(--color-secondary);
+  }
+  60% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+    box-shadow:
+        0  -28px 0 -2px var(--color-primary),
+      20px -20px 0 -2px var(--color-secondary),
+      28px    0  0 -2px var(--color-primary),
+      20px  20px 0 -2px var(--color-secondary),
+        0   28px 0 -2px var(--color-primary),
+     -20px  20px 0 -2px var(--color-secondary),
+     -28px    0  0 -2px var(--color-primary),
+     -20px -20px 0 -2px var(--color-secondary);
+  }
+}
+
+@keyframes theme-icon-spin {
+  0%   { transform: rotate(0deg) scale(1); }
+  40%  { transform: rotate(200deg) scale(1.3); }
+  100% { transform: rotate(360deg) scale(1); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .btn-theme-toggle::after,
+  .btn-theme-toggle__icon--spin {
+    animation: none !important;
   }
 }

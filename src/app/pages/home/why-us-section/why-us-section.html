@@ -2,35 +2,35 @@
   <div class="why-us-section__inner">
     <div class="why-us-section__grid">
       <!-- Feature cards grid -->
-      <div class="why-us-section__cards" scrollReveal revealDirection="left">
+      <div class="why-us-section__cards">
         <div class="why-us-section__cards-grid">
           <div class="why-us-section__cards-col why-us-section__cards-col--offset">
-            @for (feature of features().slice(0, 2); track feature.title) {
-              <app-feature-card [card]="feature" />
+            @for (feature of features().slice(0, 2); track feature.title; let i = $index) {
+              <app-feature-card scrollReveal [revealDelay]="i * 130" [card]="feature" />
             }
           </div>
           <div class="why-us-section__cards-col">
-            @for (feature of features().slice(2); track feature.title) {
-              <app-feature-card [card]="feature" />
+            @for (feature of features().slice(2); track feature.title; let i = $index) {
+              <app-feature-card scrollReveal [revealDelay]="(i + 2) * 130" [card]="feature" />
             }
           </div>
         </div>
       </div>
 
       <!-- Copy -->
-      <div class="why-us-section__copy" scrollReveal revealDirection="right">
-        <h2 id="why-us-heading" class="why-us-section__heading">
+      <div class="why-us-section__copy">
+        <h2 id="why-us-heading" scrollReveal class="why-us-section__heading">
           Our All Solution for <br />
           <span class="why-us-section__heading-accent">Smarter Media Buying</span>
         </h2>
 
-        <p class="why-us-section__description">
+        <p scrollReveal [revealDelay]="100" class="why-us-section__description">
           We simplify media buying with data, automation, and collaboration to maximize ROI
         </p>
 
         <ul class="why-us-section__checklist">
-          @for (item of checklist(); track item.text) {
-            <li class="why-us-section__checklist-item">
+          @for (item of checklist(); track item.text; let i = $index) {
+            <li scrollReveal [revealDelay]="220 + i * 120" class="why-us-section__checklist-item">
               <div class="why-us-section__check-icon">
                 <span class="material-symbols-outlined">check</span>
               </div>

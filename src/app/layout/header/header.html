@@ -1,4 +1,4 @@
-<header class="site-header">
+<header class="site-header" [class.site-header--scrolled]="isScrolled()">
   <nav class="header-nav">
     <a routerLink="/">
       <img ngSrc="/assets/logo.webp" alt="Media Alacarte" height="44" width="160" />
@@ -15,8 +15,8 @@
     </div>
 
     <div class="header-nav__actions">
-      <button type="button" class="btn-theme-toggle" (click)="theme.toggle()">
-        <span class="material-symbols-outlined">
+      <button type="button" class="btn-theme-toggle" [class.is-bursting]="themeBurst()" (click)="toggleTheme()">
+        <span class="material-symbols-outlined" [class.btn-theme-toggle__icon--spin]="themeBurst()">
           {{ theme.isDark() ? 'light_mode' : 'dark_mode' }}
         </span>
       </button>

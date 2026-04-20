@@ -23,6 +23,9 @@ export interface StatItem {
   readonly colorClass: 'primary' | 'secondary';
   readonly icon?: string;
   readonly fullWidth?: boolean;
+  readonly countTarget?: number;
+  readonly countSuffix?: string;
+  readonly countDecimals?: number;
 }
 
 export interface ChecklistItem {
