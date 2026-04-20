@@ -1,6 +1,6 @@
 <app-hero-section />
 
-@defer (on viewport) {
+@defer (on immediate) {
   <app-services-section />
 } @loading (after 100ms; minimum 400ms) {
   <app-section-spinner />
@@ -8,7 +8,7 @@
   <div style="min-height: 600px"></div>
 }
 
-@defer (on viewport) {
+@defer (on immediate) {
   <app-why-us-section />
 } @loading (after 100ms; minimum 400ms) {
   <app-section-spinner />
@@ -16,7 +16,7 @@
   <div style="min-height: 700px"></div>
 }
 
-@defer (on viewport) {
+@defer (on immediate) {
   <app-stats-section />
 } @loading (after 100ms; minimum 400ms) {
   <app-section-spinner />
@@ -24,7 +24,7 @@
   <div style="min-height: 500px"></div>
 }
 
-@defer (on viewport) {
+@defer (on immediate) {
   <app-cta-section />
 } @loading (after 100ms; minimum 400ms) {
   <app-section-spinner />
