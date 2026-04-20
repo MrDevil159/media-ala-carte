@@ -19,10 +19,6 @@
       opacity: 1;
       transform: scale(1);
     }
-
-    .feature-card__icon {
-      animation: icon-pop 0.5s ease-in-out;
-    }
   }
 
   &__arrow-badge {
@@ -50,10 +46,20 @@
     font-size: 2.25rem !important;
     display: block;
     margin-bottom: 1rem;
+    transition: transform 0.2s ease-out;
 
     &--primary { color: var(--color-primary); }
     &--secondary { color: var(--color-primary); }
     &--primary-dim { color: var(--color-primary-dim); }
+  }
+
+  &:hover &__icon {
+    transform: scale(1.1);
+  }
+
+  &:active &__icon {
+    transform: scale(1);
+    transition-duration: 0.1s;
   }
 
   &__title {
@@ -69,15 +75,8 @@
   }
 }
 
-@keyframes icon-pop {
-  0%   { transform: scale(1) rotate(0deg); }
-  35%  { transform: scale(1.1) rotate(-2deg); }
-  65%  { transform: scale(0.9) rotate(2deg); }
-  100% { transform: scale(1) rotate(0deg); }
-}
-
 @media (prefers-reduced-motion: reduce) {
   .feature-card__icon {
-    animation: none !important;
+    transition: none !important;
   }
 }
