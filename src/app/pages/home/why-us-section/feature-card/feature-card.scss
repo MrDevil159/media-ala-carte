@@ -21,7 +21,7 @@
     }
 
     .feature-card__icon {
-      animation: icon-pop 0.35s ease;
+      animation: icon-pop 0.3s ease-out;
     }
   }
 
@@ -70,10 +70,9 @@
 }
 
 @keyframes icon-pop {
-  0%   { transform: scale(1) rotate(0deg); }
-  35%  { transform: scale(1.3) rotate(-10deg); }
-  65%  { transform: scale(0.92) rotate(5deg); }
-  100% { transform: scale(1) rotate(0deg); }
+  0%   { transform: scale(1); }
+  40%  { transform: scale(1.12); }
+  100% { transform: scale(1); }
 }
 
 @media (prefers-reduced-motion: reduce) {
