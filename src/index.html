@@ -67,7 +67,7 @@
   }
   </script>
 </head>
-<body>
+<body class="mac-loading">
   <!-- ─── Intro loader — visible from first paint, before Angular boots ────── -->
   <div id="mac-page-loader" aria-hidden="true">
     <div class="mac-loader-panel mac-loader-panel--top"></div>
@@ -93,6 +93,7 @@
   </div>
 
   <style>
+    body.mac-loading { overflow: hidden; }
     #mac-page-loader {
       position: fixed;
       inset: 0;

@@ -36,6 +36,7 @@ export class PageLoader implements OnDestroy {
 
         const t2 = setTimeout(() => {
           el.style.display = 'none';
+          this.document.body.classList.remove('mac-loading');
         }, CURTAIN_DURATION_MS);
 
         this.timers.push(t2);
