@@ -1,6 +1,5 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { HeroSection } from './hero-section/hero-section';
-import { MarqueeRibbons } from './marquee-ribbons/marquee-ribbons';
 import { ServicesSection } from './services-section/services-section';
 import { WhyUsSection } from './why-us-section/why-us-section';
 import { StatsSection } from './stats-section/stats-section';
