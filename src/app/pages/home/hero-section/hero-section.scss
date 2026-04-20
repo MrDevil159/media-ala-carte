@@ -141,6 +141,10 @@
     }
   }
 
+  &__picture {
+    display: contents;
+  }
+
   &__image {
     object-fit: cover;
     display: block;
