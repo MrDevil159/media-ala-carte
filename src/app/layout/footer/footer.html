@@ -2,9 +2,9 @@
   <div class="footer-grid">
     <!-- Brand + social -->
     <div class="footer-brand">
-      <a style="cursor:pointer" (click)="scrollToTop()">
+      <div style="cursor:pointer" (click)="scrollToTop()">
         <img ngSrc="/assets/logo.webp" alt="Media Alacarte" height="44" width="160" />
-      </a>
+      </div>
       <p class="footer-brand__description">The Future Media Hub</p>
       <div class="footer-brand__social">
         @for (link of socialLinks(); track link.label) {
