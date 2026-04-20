@@ -128,14 +128,15 @@
   }
 }
 
-// Check-icon spring pop on scroll reveal
+// Check-icon spring pop on scroll reveal (transition is more reliable than animation on mobile)
 @media (prefers-reduced-motion: no-preference) {
   .why-us-section__checklist-item .why-us-section__check-icon {
     transform: scale(0) rotate(-30deg);
+    transition: transform 0.45s cubic-bezier(0.34, 1.56, 0.64, 1) 0.35s;
   }
 
   .why-us-section__checklist-item.is-revealed .why-us-section__check-icon {
-    animation: check-pop 0.45s cubic-bezier(0.34, 1.56, 0.64, 1) 0.35s both;
+    transform: scale(1) rotate(0deg);
   }
 }
 
