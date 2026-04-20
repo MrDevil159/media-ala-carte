@@ -118,10 +118,13 @@
       stroke: url(#loader-spinner-grad);
       stroke-linecap: round;
       transform-origin: 50px 50px;
+      transform: rotate(-140deg); 
+      will-change: transform;
     }
-    .mac-ring--outer  { stroke-width: 7; stroke-dasharray: 160 100; animation: macSpin 2.5s ease-in-out infinite; }
-    .mac-ring--middle { stroke-width: 7; stroke-dasharray: 110 70;  animation: macSpin 2.5s ease-in-out infinite 0.15s; }
-    .mac-ring--inner  { stroke-width: 7; stroke-dasharray: 60 50;   animation: macSpin 2.5s ease-in-out infinite 0.3s; }
+
+    .mac-ring--outer  { stroke-width: 7; stroke-dasharray: 160 100; animation: macSpin 2.5s ease-in-out 0s infinite backwards; }
+    .mac-ring--middle { stroke-width: 7; stroke-dasharray: 110 70;  animation: macSpin 2.5s ease-in-out 0.15s infinite backwards; }
+    .mac-ring--inner  { stroke-width: 7; stroke-dasharray: 60 50;   animation: macSpin 2.5s ease-in-out 0.3s infinite backwards; }
     @keyframes macSpin {
       0%        { transform: rotate(-140deg); }
       45%, 100% { transform: rotate(220deg); }
