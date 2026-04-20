@@ -35,7 +35,7 @@ export class ServicesSection {
 
   protected readonly services = signal<ServiceCard[]>([
     {
-      imageUrl: '/assets/advertisers.png',
+      imageUrl: '/assets/advertisers.webp',
       imageAlt: 'Sophisticated workspace with analytics monitors',
       imagePosition: 'center left',
       badge: 'FOR BRANDS',
@@ -46,7 +46,7 @@ export class ServicesSection {
       accentColor: 'primary',
     },
     {
-      imageUrl: '/assets/agencies.png',
+      imageUrl: '/assets/agencies.webp',
       imageAlt: 'Creative agency team brainstorming around interactive table',
       imagePosition: 'center right',
       badge: 'FOR TEAMS',
@@ -57,7 +57,7 @@ export class ServicesSection {
       accentColor: 'primary',
     },
     {
-      imageUrl: '/assets/media_owners.png',
+      imageUrl: '/assets/media_owners.webp',
       imageAlt: 'High-tech broadcast master control room',
       imagePosition: 'center left',
       badge: 'FOR PUBLISHERS',

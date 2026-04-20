@@ -10,4 +10,5 @@ import { ServiceCard } from '../../../../core/models/home.model';
 export class ServiceCardComponent {
   readonly card = input.required<ServiceCard>();
   readonly active = input<boolean>(false);
+  readonly eager = input<boolean>(false);
 }
