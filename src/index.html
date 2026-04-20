@@ -68,6 +68,73 @@
   </script>
 </head>
 <body>
+  <!-- ─── Intro loader — visible from first paint, before Angular boots ────── -->
+  <div id="mac-page-loader" aria-hidden="true">
+    <div class="mac-loader-panel mac-loader-panel--top"></div>
+    <div class="mac-loader-panel mac-loader-panel--bottom"></div>
+    <div class="mac-loader-spinner">
+      <svg viewBox="0 0 100 100" aria-label="Loading" role="img">
+        <defs>
+          <linearGradient id="loader-spinner-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="#FF512F" />
+            <stop offset="100%" stop-color="#DD2476" />
+          </linearGradient>
+        </defs>
+        <circle class="mac-ring mac-ring--outer" cx="50" cy="50" r="40" />
+        <circle class="mac-ring mac-ring--middle" cx="50" cy="50" r="28" />
+        <circle class="mac-ring mac-ring--inner" cx="50" cy="50" r="16" />
+      </svg>
+    </div>
+  </div>
+
+  <style>
+    #mac-page-loader {
+      position: fixed;
+      inset: 0;
+      z-index: 9999;
+      pointer-events: all;
+    }
+    .mac-loader-panel {
+      position: absolute;
+      width: 100%;
+      height: 50%;
+      background-color: #0e0e0f;
+      transition: transform 0.85s cubic-bezier(0.77, 0, 0.175, 1) 0.2s;
+    }
+    .mac-loader-panel--top    { top: 0; }
+    .mac-loader-panel--bottom { bottom: 0; }
+    .mac-loader-spinner {
+      position: absolute;
+      inset: 0;
+      z-index: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: opacity 0.35s ease;
+    }
+    .mac-loader-spinner svg { width: 150px; height: 150px; }
+    .mac-ring {
+      fill: none;
+      stroke: url(#loader-spinner-grad);
+      stroke-linecap: round;
+      transform-origin: 50px 50px;
+    }
+    .mac-ring--outer  { stroke-width: 7; stroke-dasharray: 160 100; animation: macSpin 2.5s ease-in-out infinite; }
+    .mac-ring--middle { stroke-width: 7; stroke-dasharray: 110 70;  animation: macSpin 2.5s ease-in-out infinite 0.15s; }
+    .mac-ring--inner  { stroke-width: 7; stroke-dasharray: 60 50;   animation: macSpin 2.5s ease-in-out infinite 0.3s; }
+    @keyframes macSpin {
+      0%        { transform: rotate(-140deg); }
+      45%, 100% { transform: rotate(220deg); }
+    }
+    #mac-page-loader.is-leaving .mac-loader-spinner       { opacity: 0; }
+    #mac-page-loader.is-leaving .mac-loader-panel--top    { transform: translateY(-100%); }
+    #mac-page-loader.is-leaving .mac-loader-panel--bottom { transform: translateY(100%); }
+    @media (prefers-reduced-motion: reduce) {
+      .mac-ring { animation: none; }
+      .mac-loader-panel { transition: none; }
+    }
+  </style>
+
   <app-root></app-root>
 </body>
 </html>
