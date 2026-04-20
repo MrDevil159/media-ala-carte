@@ -86,3 +86,8 @@
     animation: none;
   }
 }
+
+// Pause marquee on hover
+.marquee-ribbon:hover .marquee-ribbon__track {
+  animation-play-state: paused;
+}

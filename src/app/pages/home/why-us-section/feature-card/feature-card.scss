@@ -7,7 +7,8 @@
   padding: 2rem;
   border-radius: 1.5rem;
   border: 1px solid var(--color-border);
-  transition: border-color 0.2s ease;
+  transition: border-color 0.2s ease, transform 0.4s cubic-bezier(0.03, 0.98, 0.52, 0.99);
+  will-change: transform;
   cursor: pointer;
   position: relative;
 

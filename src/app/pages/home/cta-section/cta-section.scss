@@ -31,10 +31,12 @@
   }
 
   &__heading-gradient {
-    background: linear-gradient(to right, var(--color-primary), var(--color-secondary));
+    background: linear-gradient(90deg, var(--color-primary), var(--color-secondary), var(--color-primary));
+    background-size: 200% auto;
     background-clip: text;
     -webkit-background-clip: text;
     color: transparent;
+    animation: gradient-flow 4s linear infinite;
   }
 
   &__list {
@@ -122,4 +124,18 @@
 @keyframes nudge {
   0%, 100% { transform: translateX(0); }
   50%       { transform: translateX(6px); }
+}
+
+@keyframes gradient-flow {
+  to { background-position: 200% center; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cta-section__heading-gradient {
+    background: linear-gradient(to right, var(--color-primary), var(--color-secondary));
+    background-size: auto;
+    background-clip: text;
+    -webkit-background-clip: text;
+    animation: none !important;
+  }
 }
