@@ -2,7 +2,7 @@
   <div class="why-us-section__inner">
     <div class="why-us-section__grid">
       <!-- Feature cards grid -->
-      <div class="why-us-section__cards">
+      <div class="why-us-section__cards" scrollReveal revealDirection="left">
         <div class="why-us-section__cards-grid">
           <div class="why-us-section__cards-col why-us-section__cards-col--offset">
             @for (feature of features().slice(0, 2); track feature.title) {
@@ -18,7 +18,7 @@
       </div>
 
       <!-- Copy -->
-      <div class="why-us-section__copy">
+      <div class="why-us-section__copy" scrollReveal revealDirection="right">
         <h2 id="why-us-heading" class="why-us-section__heading">
           Our All Solution for <br />
           <span class="why-us-section__heading-accent">Smarter Media Buying</span>

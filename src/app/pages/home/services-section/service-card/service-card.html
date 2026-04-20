@@ -3,6 +3,8 @@
        [src]="card().imageUrl"
        [style.object-position]="card().imagePosition ?? 'center'"
        [attr.loading]="eager() ? 'eager' : 'lazy'"
+       [class.service-card__image--loaded]="imageLoaded()"
+       (load)="onImageLoad()"
        class="service-card__image" />
 
   <div class="service-card__gradient"></div>

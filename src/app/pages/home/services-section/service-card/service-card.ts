@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, input, signal } from '@angular/core';
 import { ServiceCard } from '../../../../core/models/home.model';
 
 @Component({
@@ -11,4 +11,10 @@ export class ServiceCardComponent {
   readonly card = input.required<ServiceCard>();
   readonly active = input<boolean>(false);
   readonly eager = input<boolean>(false);
+
+  protected readonly imageLoaded = signal(false);
+
+  protected onImageLoad(): void {
+    this.imageLoaded.set(true);
+  }
 }

@@ -1,10 +1,11 @@
 import { ChangeDetectionStrategy, Component, signal } from '@angular/core';
 import { ChecklistItem, FeatureCard } from '../../../core/models/home.model';
 import { FeatureCardComponent } from './feature-card/feature-card';
+import { ScrollRevealDirective } from '../../../shared/scroll-reveal/scroll-reveal.directive';
 
 @Component({
   selector: 'app-why-us-section',
-  imports: [FeatureCardComponent],
+  imports: [FeatureCardComponent, ScrollRevealDirective],
   templateUrl: './why-us-section.html',
   styleUrl: './why-us-section.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,

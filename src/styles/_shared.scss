@@ -34,6 +34,32 @@
   font-weight: 800;
 }
 
+// ─── Scroll Reveal ───────────────────────────────────────────────────────────
+.scroll-reveal {
+  opacity: 0;
+  transition:
+    opacity 0.65s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+    transform 0.65s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+
+  &--up    { transform: translateY(44px); }
+  &--left  { transform: translateX(-44px); }
+  &--right { transform: translateX(44px); }
+  &--fade  { transform: none; }
+
+  &.is-revealed {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .scroll-reveal {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+  }
+}
+
 // ─── Buttons ─────────────────────────────────────────────────────────────────
 .btn-primary {
   background: linear-gradient(to right, var(--color-primary), var(--color-secondary));
