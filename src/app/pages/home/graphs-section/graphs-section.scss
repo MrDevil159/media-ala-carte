@@ -264,8 +264,6 @@
   animation: gs-draw 4s ease forwards infinite;
 }
 
-.graphs-section__area {}
-
 @keyframes gs-draw {
   0% {
     stroke-dashoffset: 900;
