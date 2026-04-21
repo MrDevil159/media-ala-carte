@@ -6,10 +6,11 @@ import { ServiceCard } from '../../../core/models/home.model';
 import { ServiceCardComponent } from './service-card/service-card';
 import { ScrollRevealDirective } from '../../../shared/scroll-reveal/scroll-reveal.directive';
 import { SpotlightDirective } from '../../../shared/spotlight/spotlight.directive';
+import { GraphsSectionComponent } from '../graphs-section/graphs-section';
 
 @Component({
   selector: 'app-services-section',
-  imports: [ServiceCardComponent, ScrollRevealDirective, SpotlightDirective],
+  imports: [ServiceCardComponent, ScrollRevealDirective, SpotlightDirective, GraphsSectionComponent],
   templateUrl: './services-section.html',
   styleUrl: './services-section.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,

@@ -1,0 +1,204 @@
+<section class="graphs-section">
+  <div class="graphs-section__inner">
+    @for (g of graphs(); track g.title; let i = $index) {
+    <div class="graphs-section__panel">
+      <div class="graphs-section__row" [class.graphs-section__row--reverse]="(i % 2) === 1">
+
+        <!-- Chart card -->
+        <div class="graphs-section__card graphs-section__card--overflow-unset">
+          <div class="graphs-section__top">
+            <div class="graphs-section__dots">
+              <span class="graphs-section__dot">
+                <div class="graphs-section__tooltip">Close</div>
+              </span>
+              <span class="graphs-section__dot">
+                <div class="graphs-section__tooltip">Minimize</div>
+              </span>
+              <span class="graphs-section__dot">
+                <div class="graphs-section__tooltip">Expand</div>
+              </span>
+            </div>
+          </div>
+
+          <div class="graphs-section__content">
+            <div class="graphs-section__card-label">{{ g.desc }}</div>
+            <div class="graphs-section__skeleton graphs-section__skeleton--value"></div>
+            <div class="graphs-section__skeleton graphs-section__skeleton--small"></div>
+
+            <!-- ── Line chart ─────────────────────────────────── -->
+            @if (g.type === 'line') {
+            <div class="graphs-section__line-wrap">
+              <svg class="graphs-section__svg" viewBox="0 0 500 200" preserveAspectRatio="none">
+                <defs>
+                  <linearGradient [attr.id]="'grad' + i" x1="0" x2="0" y1="0" y2="1">
+                    <stop offset="0%" stop-color="var(--color-primary)" stop-opacity=".3" />
+                    <stop offset="100%" stop-color="var(--color-primary)" stop-opacity="0" />
+                  </linearGradient>
+                </defs>
+                <path class="graphs-section__area"
+                  d="M10 130 C90 110 120 55 180 75 S280 140 340 120 S430 70 490 95 L490 200 L10 200Z"
+                  [attr.fill]="'url(#grad' + i + ')'">
+                </path>
+                <path class="graphs-section__line" d="M10 130 C90 110 120 55 180 75 S280 140 340 120 S430 70 490 95">
+                </path>
+              </svg>
+
+              <!-- Tooltip dots + month labels overlaid -->
+              <div class="graphs-section__line-overlay">
+                @for (pt of g.linePoints ?? []; track pt.month) {
+                <div class="graphs-section__line-col">
+                  <div class="graphs-section__line-dot">
+                    <div class="graphs-section__tooltip">{{ pt.tooltip }}</div>
+                  </div>
+                  <span class="graphs-section__month-label">{{ pt.month }}</span>
+                </div>
+                }
+              </div>
+
+              @if (i === 0) {
+              <div class="graphs-section__floating graphs-section__floating--donut">
+                <div class="graphs-section__floating-label">Performance</div>
+                <div class="graphs-section__float-mini-donut-wrap">
+                  <div class="graphs-section__float-mini-donut"></div>
+                  <div class="graphs-section__float-mini-donut-legend">
+                    <div class="graphs-section__skeleton graphs-section__skeleton--small" style="margin:0"></div>
+                    <div class="graphs-section__skeleton graphs-section__skeleton--small" style="margin:0; width:60px">
+                    </div>
+                  </div>
+                </div>
+              </div>
+              }
+              @if (i === 2) {
+              <div class="graphs-section__floating">
+                <div class="graphs-section__floating-label">Total Reach</div>
+                <div class="graphs-section__float-bars">
+                  <span class="graphs-section__float-bar" style="height:45px"></span>
+                  <span class="graphs-section__float-bar" style="height:28px"></span>
+                  <span class="graphs-section__float-bar" style="height:38px"></span>
+                  <span class="graphs-section__float-bar" style="height:55px"></span>
+                  <span class="graphs-section__float-bar" style="height:32px"></span>
+                </div>
+                <div class="graphs-section__skeleton graphs-section__skeleton--small"></div>
+              </div>
+              }
+            </div>
+
+            <!-- ── Bar chart ──────────────────────────────────── -->
+            } @else if (g.type === 'bars') {
+            <div class="graphs-section__bars-wrap">
+              <div class="graphs-section__bars">
+                @for (bar of g.bars ?? []; track bar.month) {
+                <div class="graphs-section__bar-col">
+                  <div class="graphs-section__bar-inner" [style.height]="bar.height + '%'">
+                    <div class="graphs-section__tooltip">{{ bar.tooltip }}</div>
+                  </div>
+                </div>
+                }
+              </div>
+              <!-- Month labels -->
+              <div class="graphs-section__month-row">
+                @for (bar of g.bars ?? []; track bar.month) {
+                <span class="graphs-section__month-label">{{ bar.month }}</span>
+                }
+              </div>
+
+              @if (i === 1) {
+              <div class="graphs-section__floating graphs-section__floating--metric">
+                <div class="graphs-section__floating-label">ROI Growth</div>
+                <div class="graphs-section__float-metric-wrap">
+                  <div class="graphs-section__float-metric-value">+324%</div>
+                  <svg class="graphs-section__float-metric-sparkline" viewBox="0 0 100 40" preserveAspectRatio="none">
+                    <defs>
+                      <linearGradient id="spark-grad" x1="0" x2="0" y1="0" y2="1">
+                        <stop offset="0%" stop-color="var(--color-primary)" stop-opacity="0.4" />
+                        <stop offset="100%" stop-color="var(--color-primary)" stop-opacity="0" />
+                      </linearGradient>
+                    </defs>
+                    <path d="M0,35 Q15,35 25,25 T50,20 T75,10 T100,5 L100,40 L0,40 Z" fill="url(#spark-grad)" />
+                    <path d="M0,35 Q15,35 25,25 T50,20 T75,10 T100,5" fill="none" stroke="var(--color-primary)"
+                      stroke-width="3" stroke-linecap="round" />
+                    <circle cx="100" cy="5" r="4" fill="var(--color-surface-container)" stroke="var(--color-primary)"
+                      stroke-width="2" />
+                  </svg>
+                </div>
+              </div>
+              }
+            </div>
+
+            <!-- ── Donut chart ─────────────────────────────────── -->
+            } @else if (g.type === 'donut') {
+            <div class="graphs-section__donut-wrap">
+              <div class="graphs-section__donut">
+                <!-- Tooltip panel shown when hovering the donut -->
+                <div class="graphs-section__donut-tip">
+                  @for (slice of g.donutSlices ?? []; track slice.label) {
+                  <div class="graphs-section__donut-tip-row">
+                    <span class="graphs-section__donut-tip-dot" [style.background]="slice.color"></span>
+                    <span>{{ slice.tooltip }}</span>
+                  </div>
+                  }
+                </div>
+              </div>
+            </div>
+
+            <!-- Progress bars with matched per-slice colors -->
+            <div class="graphs-section__prog-legend">
+              @for (slice of g.donutSlices ?? []; track slice.label; let last = $last) {
+              <div class="graphs-section__prog-caption">
+                <span class="graphs-section__slice-dot" [style.background]="slice.color"></span>
+                {{ slice.label }} <strong>{{ slice.pct }}%</strong>
+                @if (!last) {
+                <span class="graphs-section__separator"> · </span>
+                }
+              </div>
+              }
+            </div>
+
+            <div class="graphs-section__stacked-track">
+              @for (slice of g.donutSlices ?? []; track slice.label) {
+              <div class="graphs-section__stacked-fill" [style.width]="slice.pct + '%'"
+                [style.background]="slice.color">
+              </div>
+              }
+            </div>
+
+            @if (i === 3) {
+            <div class="graphs-section__floating graphs-section__floating--radar">
+              <div class="graphs-section__floating-label">Efficiency</div>
+              <div class="graphs-section__float-radar-wrap">
+                <svg class="graphs-section__float-radar" viewBox="0 0 100 100">
+                  <!-- Web lines -->
+                  <circle cx="50" cy="50" r="40" fill="none" stroke="var(--color-border-subtle)" stroke-width="1" />
+                  <circle cx="50" cy="50" r="25" fill="none" stroke="var(--color-border-subtle)" stroke-width="1" />
+                  <line x1="50" y1="50" x2="50" y2="10" stroke="var(--color-border-subtle)" stroke-width="1" />
+                  <line x1="50" y1="50" x2="88" y2="62" stroke="var(--color-border-subtle)" stroke-width="1" />
+                  <line x1="50" y1="50" x2="12" y2="62" stroke="var(--color-border-subtle)" stroke-width="1" />
+
+                  <!-- Area 1 -->
+                  <polygon points="50,15 80,60 25,55" fill="var(--color-primary)" fill-opacity="0.3"
+                    stroke="var(--color-primary)" stroke-width="2" stroke-linejoin="round" />
+
+                  <!-- Area 2 -->
+                  <polygon points="50,30 70,50 15,65" fill="var(--color-secondary)" fill-opacity="0.5"
+                    stroke="var(--color-secondary)" stroke-width="2" stroke-linejoin="round" />
+                </svg>
+              </div>
+            </div>
+            }
+            }
+          </div>
+        </div>
+
+        <!-- Copy -->
+        <div class="graphs-section__description">
+          <span class="graphs-section__badge">{{ g.badge }}</span>
+          <h3 class="graphs-section__title">{{ g.title }}</h3>
+          <p class="graphs-section__label">{{ g.desc }}</p>
+          <p class="graphs-section__long">{{ g.longDesc }}</p>
+        </div>
+
+      </div><!-- /.graphs-section__row -->
+    </div><!-- /.graphs-section__panel -->
+    }
+  </div>
+</section>

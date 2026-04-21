@@ -1,0 +1,713 @@
+:host {
+  display: block;
+}
+
+// ─── Section shell ──────────────────────────────────────────────────────────
+.graphs-section {
+  padding: 4rem 0 0 0;
+
+  &__inner {
+    max-width: 80rem;
+    margin-inline: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+  }
+}
+
+// ─── Panel box wrapping each row ─────────────────────────────────────────────
+.graphs-section__panel {
+  background: var(--color-surface-container-low);
+  border: 1px solid var(--color-border-subtle);
+  border-radius: 2rem;
+  padding: 1.25rem;
+  transition: box-shadow 0.3s ease;
+
+  &:hover {
+    box-shadow: 0 8px 40px rgba(0, 0, 0, .25);
+  }
+
+  @media (width >=640px) {
+    padding: 2rem;
+  }
+
+  @media (width >=1024px) {
+    padding: 3rem;
+  }
+}
+
+// ─── Alternating row layout ──────────────────────────────────────────────────
+.graphs-section__row {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2.5rem;
+  align-items: center;
+
+  @media (width >=1024px) {
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+
+    &--reverse {
+
+      .graphs-section__description {
+        order: -1;
+      }
+    }
+  }
+}
+
+// ─── Description copy ───────────────────────────────────────────────────────
+.graphs-section__description {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  padding: 0.5rem 0;
+}
+
+.graphs-section__badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.4rem 1rem;
+  border-radius: var(--radius-full);
+  background-color: var(--color-surface-container-high);
+  border: 1px solid var(--color-border);
+  width: fit-content;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--color-primary);
+  border-color: var(--color-primary);
+}
+
+.graphs-section__title {
+  font-family: var(--font-headline);
+  font-size: 1.75rem;
+  font-weight: 700;
+  line-height: 1.25;
+  color: var(--color-on-surface);
+
+  @media (width >=1024px) {
+    font-size: 2.25rem;
+  }
+}
+
+.graphs-section__label {
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--color-on-surface-variant);
+}
+
+.graphs-section__long {
+  font-size: 1rem;
+  line-height: 1.7;
+  color: var(--color-on-surface-variant);
+}
+
+// ─── Chart card ─────────────────────────────────────────────────────────────
+.graphs-section__card {
+  background: var(--color-surface-container);
+  border-radius: 1.25rem;
+  position: relative;
+  border: 1px solid var(--color-border-subtle);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, .2);
+  transition: transform 0.35s ease, box-shadow 0.35s ease;
+
+  &:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 36px rgba(0, 0, 0, .35);
+  }
+}
+
+// ─── Card top bar (traffic-light dots) ──────────────────────────────────────
+.graphs-section__top {
+  height: 44px;
+  background: var(--color-surface-container-high);
+  display: flex;
+  align-items: center;
+  padding: 0 1rem;
+  border-bottom: 1px solid var(--color-border-subtle);
+  border-top-left-radius: 1.25rem;
+  border-top-right-radius: 1.25rem;
+
+  @media (width >=640px) {
+    height: 52px;
+    padding: 0 1.25rem;
+  }
+}
+
+.graphs-section__dots {
+  display: flex;
+  gap: 8px;
+  margin-left: auto;
+}
+
+.graphs-section__dot {
+  width: 13px;
+  height: 13px;
+  border-radius: 50%;
+  position: relative;
+  cursor: pointer;
+
+  .graphs-section__tooltip {
+    top: calc(100% + 8px);
+    left: 50%;
+    transform: translateX(-50%) translateY(-4px);
+
+    &::after {
+      top: auto;
+      bottom: 100%;
+      border-top-color: transparent;
+      border-bottom-color: var(--color-surface-container-highest, #262627);
+    }
+  }
+
+  &:hover {
+    .graphs-section__tooltip {
+      opacity: 1;
+      transform: translateX(-50%) translateY(0);
+    }
+  }
+
+  &:nth-child(1) {
+    background: var(--color-primary);
+  }
+
+  &:nth-child(2) {
+    background: var(--color-primary-dim);
+    opacity: 0.6;
+  }
+
+  &:nth-child(3) {
+    background: var(--color-on-surface-variant);
+    opacity: 0.4;
+  }
+}
+
+// ─── Card content area ───────────────────────────────────────────────────────
+.graphs-section__content {
+  padding: 0.875rem;
+
+  @media (width >=640px) {
+    padding: 1.25rem;
+  }
+
+  @media (width >=1024px) {
+    padding: 1.5rem;
+  }
+}
+
+.graphs-section__card-label {
+  font-size: 0.8125rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--color-on-surface-variant);
+  margin-bottom: 0.75rem;
+}
+
+// ─── Skeleton loaders ────────────────────────────────────────────────────────
+.graphs-section__skeleton {
+  border-radius: 0.75rem;
+  background: linear-gradient(90deg,
+      color-mix(in srgb, var(--color-on-surface) 5%, transparent) 20%,
+      color-mix(in srgb, var(--color-on-surface) 12%, transparent) 50%,
+      color-mix(in srgb, var(--color-on-surface) 5%, transparent) 80%);
+  background-size: 250% 100%;
+  animation: gs-shine 1.6s linear infinite;
+
+  &--value {
+    width: 140px;
+    height: 44px;
+    margin-bottom: 1.25rem;
+    margin-left: auto;
+  }
+
+  &--small {
+    width: 90px;
+    height: 28px;
+    margin-left: auto;
+  }
+}
+
+@keyframes gs-shine {
+  from {
+    background-position: 100% 0;
+  }
+
+  to {
+    background-position: -100% 0;
+  }
+}
+
+// ─── Line chart (SVG) ────────────────────────────────────────────────────────
+.graphs-section__svg {
+  width: 100%;
+  aspect-ratio: 500 / 160;
+  height: auto;
+  display: block;
+
+  @media (width >=640px) {
+    aspect-ratio: 500 / 200;
+  }
+}
+
+.graphs-section__line {
+  fill: none;
+  stroke: var(--color-primary);
+  stroke-width: 3.5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-dasharray: 900;
+  stroke-dashoffset: 900;
+  animation: gs-draw 4s ease forwards infinite;
+}
+
+.graphs-section__area {}
+
+@keyframes gs-draw {
+  0% {
+    stroke-dashoffset: 900;
+  }
+
+  35%,
+  100% {
+    stroke-dashoffset: 0;
+  }
+}
+
+// ─── Floating mini-card ──────────────────────────────────────────────────────
+.graphs-section__floating {
+  display: none;
+
+  @media (width >=640px) {
+    display: block;
+    position: absolute;
+    left: -3rem;
+    top: -6em;
+    background: var(--color-surface-container-high);
+    padding: 1rem 1.25rem;
+    border-radius: 1.25rem;
+    width: 190px;
+    border: 1px solid var(--color-border-subtle);
+    box-shadow: 0 16px 32px rgba(0, 0, 0, .4);
+  }
+}
+
+.graphs-section__floating-label {
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--color-on-surface-variant);
+  margin-bottom: 0.75rem;
+}
+
+.graphs-section__float-bars {
+  display: flex;
+  align-items: flex-end;
+  gap: 6px;
+  height: 60px;
+  margin-bottom: 0.875rem;
+}
+
+.graphs-section__float-bar {
+  flex: 1;
+  border-radius: 5px 5px 0 0;
+  background: var(--color-primary);
+  opacity: 0.85;
+}
+
+.graphs-section__floating--donut {
+  width: 220px;
+}
+
+.graphs-section__float-mini-donut-wrap {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.graphs-section__float-mini-donut {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background: conic-gradient(var(--color-primary) 0 45%,
+      var(--color-secondary) 45% 75%,
+      var(--color-surface-container-highest, #262627) 75% 100%);
+  position: relative;
+  flex-shrink: 0;
+
+  &::before {
+    content: '';
+    position: absolute;
+    inset: 12px;
+    background: var(--color-surface-container-high);
+    border-radius: 50%;
+  }
+}
+
+.graphs-section__float-mini-donut-legend {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  flex: 1;
+}
+
+// ─── Floating Metric (Sparkline) ─────────────────────────────────────────────
+.graphs-section__floating--metric {
+  width: 170px;
+
+  @media (width >=640px) {
+    top: 6rem;
+    left: -1.5rem;
+  }
+}
+
+.graphs-section__float-metric-wrap {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.graphs-section__float-metric-value {
+  font-size: 1.5rem;
+  font-family: var(--font-headline);
+  font-weight: 700;
+  color: var(--color-primary);
+  line-height: 1;
+}
+
+.graphs-section__float-metric-sparkline {
+  width: 100%;
+  height: 40px;
+  overflow: visible;
+}
+
+// ─── Floating Radar Chart ────────────────────────────────────────────────────
+.graphs-section__floating--radar {
+  width: 140px;
+
+  @media (width >=640px) {
+    top: 6rem;
+    left: -1.5rem;
+  }
+}
+
+.graphs-section__float-radar-wrap {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.graphs-section__float-radar {
+  width: 70px;
+  height: 70px;
+  overflow: visible;
+  transition: transform 0.5s ease;
+
+  &:hover {
+    transform: scale(1.1) rotate(5deg);
+  }
+}
+
+// ─── Bar chart ───────────────────────────────────────────────────────────────
+.graphs-section__bars-wrap {
+  margin-top: 0.75rem;
+}
+
+.graphs-section__bars {
+  height: 130px;
+  display: flex;
+  align-items: flex-end;
+  gap: 6px;
+
+  @media (width >=480px) {
+    height: 160px;
+  }
+
+  @media (width >=1024px) {
+    height: 200px;
+    gap: 8px;
+  }
+}
+
+.graphs-section__bar-col {
+  flex: 1;
+  display: flex;
+  align-items: flex-end;
+  height: 100%;
+  position: relative;
+}
+
+.graphs-section__bar-inner {
+  width: 100%;
+  border-radius: 10px 10px 4px 4px;
+  background: linear-gradient(180deg, var(--color-primary), var(--color-secondary));
+  transition: transform 0.3s ease, filter 0.3s ease;
+  cursor: pointer;
+  position: relative;
+
+  .graphs-section__tooltip {
+    bottom: calc(100% + 8px);
+    left: 50%;
+    transform: translateX(-50%) translateY(4px);
+  }
+
+  &:hover {
+    transform: scaleY(1.05);
+    filter: brightness(1.2);
+
+    .graphs-section__tooltip {
+      opacity: 1;
+      transform: translateX(-50%) translateY(0);
+    }
+  }
+}
+
+// ─── Donut chart ─────────────────────────────────────────────────────────────
+.graphs-section__donut-wrap {
+  display: flex;
+  justify-content: center;
+  padding: 0.5rem 0 1rem;
+}
+
+.graphs-section__donut {
+  width: 140px;
+  height: 140px;
+  border-radius: 50%;
+  background: conic-gradient(var(--color-primary) 0 62%,
+      var(--color-secondary) 62% 78%,
+      var(--color-primary-dim) 78% 100%);
+  position: relative;
+  cursor: pointer;
+
+  @media (width >=480px) {
+    width: 160px;
+    height: 160px;
+  }
+
+  @media (width >=1024px) {
+    width: 180px;
+    height: 180px;
+  }
+
+  &::before {
+    content: '';
+    position: absolute;
+    inset: 28px;
+    background: var(--color-surface-container);
+    border-radius: 50%;
+    z-index: 1;
+
+    @media (width >=1024px) {
+      inset: 34px;
+    }
+  }
+
+  &:hover {
+    .graphs-section__donut-tip {
+      opacity: 1;
+      transform: translate(-50%, -50%) scale(1);
+    }
+  }
+}
+
+.graphs-section__donut-tip {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(0.9);
+  z-index: 2;
+  background: var(--color-surface-container-highest, #262627);
+  border: 1px solid var(--color-border-subtle);
+  border-radius: 0.75rem;
+  padding: 0.5rem 0.75rem;
+  width: max-content;
+  max-width: 180px;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.2s ease, transform 0.2s ease;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, .45);
+}
+
+.graphs-section__donut-tip-row {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.7rem;
+  font-weight: 600;
+  color: var(--color-on-surface);
+  white-space: nowrap;
+  padding: 0.15rem 0;
+}
+
+.graphs-section__donut-tip-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+// ─── Progress bars (donut card) ──────────────────────────────────────────────
+.graphs-section__prog-legend {
+  display: flex;
+  gap: 0.5rem;
+  margin-block: 1rem;
+}
+
+.graphs-section__prog-caption {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  color: var(--color-on-surface-variant);
+
+  strong {
+    color: var(--color-on-surface);
+    font-weight: 700;
+  }
+}
+
+.graphs-section__slice-dot {
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  flex-shrink: 0;
+  display: inline-block;
+}
+
+.graphs-section__stacked-track {
+  display: flex;
+  height: 8px;
+  border-radius: 99px;
+  background: var(--color-surface-container-highest, #262627);
+  overflow: hidden;
+  gap: 2px;
+  margin-bottom: 1rem;
+}
+
+.graphs-section__stacked-fill {
+  height: 100%;
+  width: 0;
+  transition: width 1.2s cubic-bezier(0.4, 0, 0.2, 1) 0.3s;
+}
+
+// ─── Shared tooltip ──────────────────────────────────────────────────────────
+.graphs-section__tooltip {
+  position: absolute;
+  white-space: nowrap;
+  background: var(--color-surface-container-highest, #262627);
+  border: 1px solid var(--color-border-subtle);
+  color: var(--color-on-surface);
+  font-size: 0.75rem;
+  font-weight: 600;
+  padding: 0.3rem 0.65rem;
+  border-radius: 0.5rem;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.2s ease, transform 0.2s ease;
+  z-index: 10;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, .4);
+
+  &::after {
+    content: '';
+    position: absolute;
+    left: 50%;
+    top: 100%;
+    transform: translateX(-50%);
+    border: 5px solid transparent;
+    border-top-color: var(--color-surface-container-highest, #262627);
+  }
+}
+
+// ─── Month labels (bar chart) ─────────────────────────────────────────────────
+.graphs-section__month-row {
+  display: flex;
+  margin-top: 0.5rem;
+  gap: 6px;
+
+  @media (width >=1024px) {
+    gap: 8px;
+  }
+}
+
+.graphs-section__month-label {
+  flex: 1;
+  text-align: center;
+  font-size: 0.6875rem;
+  font-weight: 600;
+  color: var(--color-on-surface-variant);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  opacity: 0.7;
+}
+
+// ─── Line chart overlay (dots + month labels + tooltips) ─────────────────────
+.graphs-section__line-wrap {
+  position: relative;
+}
+
+.graphs-section__line-overlay {
+  position: absolute;
+  inset: 0;
+  bottom: auto;
+  display: flex;
+  align-items: flex-end;
+  pointer-events: none;
+  padding-bottom: 0;
+  aspect-ratio: 500 / 160;
+
+  @media (width >=640px) {
+    padding-bottom: 0.5rem;
+    aspect-ratio: 500 / 200;
+  }
+}
+
+.graphs-section__line-col {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 4px;
+  pointer-events: auto;
+  position: relative;
+}
+
+.graphs-section__line-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--color-primary);
+  border: 2px solid var(--color-surface-container);
+  cursor: pointer;
+  position: relative;
+  transition: transform 0.2s ease;
+
+  .graphs-section__tooltip {
+    bottom: calc(100% + 10px);
+    left: 50%;
+    transform: translateX(-50%) translateY(4px);
+  }
+
+  &:hover {
+    transform: scale(1.4);
+
+    .graphs-section__tooltip {
+      opacity: 1;
+      transform: translateX(-50%) translateY(0);
+    }
+  }
+}
+
+.graphs-section__line-col>.graphs-section__month-label {
+  flex: none;
+  font-size: 0.625rem;
+
+  @media (width >=640px) {
+    font-size: 0.6875rem;
+  }
+}
