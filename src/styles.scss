@@ -117,11 +117,11 @@ body {
 }
 
 ::view-transition-new(root) {
-  animation: theme-curtain-in 0.5s cubic-bezier(0.4, 0, 0.2, 1) both;
+  animation: theme-curtain-in 1s cubic-bezier(0.4, 0, 0.2, 1) both;
 }
 
 ::view-transition-old(root) {
-  animation: theme-fade-out 0.5s ease both;
+  animation: theme-fade-out 1s ease both;
 }
 
 @media (prefers-reduced-motion: reduce) {
