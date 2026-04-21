@@ -76,9 +76,27 @@ export class TooltipDirective implements OnDestroy {
     const hostRect = this.el.nativeElement.getBoundingClientRect();
     const tooltipRect = this.tooltipElement!.getBoundingClientRect();
 
-    // Position above the element
-    const top = hostRect.top - tooltipRect.height - 10;
-    const left = hostRect.left + (hostRect.width - tooltipRect.width) / 2;
+    // Determine vertical placement
+    let top = hostRect.top - tooltipRect.height - 10;
+    let placement = 'top';
+
+    // If it bleeds off the top of the viewport, flip to bottom
+    if (top < 10) {
+      top = hostRect.bottom + 10;
+      placement = 'bottom';
+      this.renderer.addClass(this.tooltipElement, 'global-tooltip--bottom');
+    }
+
+    // Determine horizontal placement
+    let left = hostRect.left + (hostRect.width - tooltipRect.width) / 2;
+    
+    // Keep within horizontal viewport bounds
+    const margin = 10;
+    if (left < margin) {
+      left = margin;
+    } else if (left + tooltipRect.width > window.innerWidth - margin) {
+      left = window.innerWidth - tooltipRect.width - margin;
+    }
 
     this.renderer.setStyle(this.tooltipElement, 'position', 'absolute');
     this.renderer.setStyle(this.tooltipElement, 'top', `${top + window.scrollY}px`);

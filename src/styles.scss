@@ -151,18 +151,29 @@ body {
 
   &--visible {
     opacity: 1;
-    transform: translateY(0);
+    transform: translateY(0) !important;
   }
 
   .global-tooltip-arrow {
-    content: '';
     position: absolute;
+    width: 0;
+    height: 0;
     top: 100%;
     left: 50%;
     transform: translateX(-50%);
-    border-width: 5px;
+    border-width: 6px;
     border-style: solid;
     border-color: var(--color-surface-container-highest, #262627) transparent transparent transparent;
+  }
+
+  &--bottom {
+    transform: translateY(4px);
+
+    .global-tooltip-arrow {
+      top: -12px !important;
+      bottom: auto !important;
+      border-color: transparent transparent var(--color-surface-container-highest, #262627) transparent !important;
+    }
   }
 }
 
