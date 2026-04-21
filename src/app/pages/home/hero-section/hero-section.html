@@ -7,7 +7,8 @@
     <!-- Copy -->
     <div class="hero-section__copy">
       <div scrollReveal revealDirection="up" [revealDelay]="1800" class="badge">
-        <span class="badge__text"><span class="badge__accent">#1</span> Media Marketplace for Advertisers & Agencies</span>
+        <span class="badge__text"><span class="badge__accent">#1</span> Media Marketplace for Advertisers &
+          Agencies</span>
       </div>
 
       <span scrollReveal revealDirection="up" [revealDelay]="1950" class="hero-section__topheading">
@@ -32,28 +33,118 @@
       </div>
     </div>
 
-    <!-- Hero image -->
-    <div scrollReveal revealDirection="right" [revealDelay]="2000" class="hero-section__visual">
+    <!-- Interactive Dashboard Skeleton -->
+    <div class="hero-section__visual">
       <div class="hero-section__visual-glow"></div>
-      <div class="hero-section__image-wrapper">
-        <picture class="hero-section__picture">
-          <source media="(max-width: 767px)" srcset="/assets/hero-mobile.webp">
-          <img ngSrc="/assets/hero.webp"
-               fill
-               priority
-               alt="Diverse team of media professionals high-fiving in a modern office"
-               class="hero-section__image" />
-        </picture>
 
-        <!-- Dashboard overlay -->
-        <div class="hero-section__overlay glass-card">
+      <div scrollReveal revealDirection="right" [revealDelay]="2000" class="hero-section__dashboard-wrapper">
+        <div class="hero-section__dashboard">
+
+          <!-- Top bar -->
+          <div class="hero-section__dashboard-top">
+            <div class="hero-section__dashboard-title">Media Command Center</div>
+            <div class="hero-section__dashboard-dots">
+              <span class="hero-section__dashboard-dot">
+                <div class="hero-section__dashboard-tooltip">Close</div>
+              </span>
+              <span class="hero-section__dashboard-dot">
+                <div class="hero-section__dashboard-tooltip">Minimize</div>
+              </span>
+              <span class="hero-section__dashboard-dot">
+                <div class="hero-section__dashboard-tooltip">Expand</div>
+              </span>
+            </div>
+          </div>
+
+          <div class="hero-section__dashboard-body">
+
+            <!-- Left Panel: Channels -->
+            <div class="hero-section__dashboard-channels">
+              <!-- Channel: Digital -->
+              <div class="hero-section__dashboard-channel">
+                <div class="hero-section__channel-icon"><span class="material-symbols-outlined">language</span></div>
+                <div class="hero-section__channel-info">
+                  <div class="hero-section__skeleton-text hero-section__skeleton-text--short"></div>
+                  <div class="hero-section__channel-bar">
+                    <div class="hero-section__channel-fill" style="width: 75%;"></div>
+                  </div>
+                </div>
+              </div>
+              <!-- Channel: TV -->
+              <div class="hero-section__dashboard-channel">
+                <div class="hero-section__channel-icon"><span class="material-symbols-outlined">live_tv</span></div>
+                <div class="hero-section__channel-info">
+                  <div class="hero-section__skeleton-text hero-section__skeleton-text--short"></div>
+                  <div class="hero-section__channel-bar">
+                    <div class="hero-section__channel-fill hero-section__channel-fill--alt" style="width: 55%;"></div>
+                  </div>
+                </div>
+              </div>
+              <!-- Channel: Radio -->
+              <div class="hero-section__dashboard-channel">
+                <div class="hero-section__channel-icon"><span class="material-symbols-outlined">podcasts</span></div>
+                <div class="hero-section__channel-info">
+                  <div class="hero-section__skeleton-text hero-section__skeleton-text--short"></div>
+                  <div class="hero-section__channel-bar">
+                    <div class="hero-section__channel-fill" style="width: 35%;"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Right Panel: Data Flow & AI Core -->
+            <div class="hero-section__dashboard-main">
+              <!-- AI Core Pulsing -->
+              <div class="hero-section__dashboard-core">
+                <div class="hero-section__core-pulse"></div>
+                <div class="hero-section__core-icon"><span class="material-symbols-outlined">psychology</span></div>
+              </div>
+
+              <!-- Data lines flowing from Core using percentage-based SVG -->
+              <svg class="hero-section__dashboard-svg" preserveAspectRatio="none">
+                <line class="hero-section__flow-line" x1="0" y1="50%" x2="100%" y2="15%" />
+                <line class="hero-section__flow-line hero-section__flow-line--thick" x1="0" y1="50%" x2="100%"
+                  y2="50%" />
+                <line class="hero-section__flow-line hero-section__flow-line--alt" x1="0" y1="50%" x2="100%" y2="85%" />
+
+                <!-- Data nodes -->
+                <circle class="hero-section__flow-node" cx="100%" cy="15%" r="4" />
+                <circle class="hero-section__flow-node" cx="100%" cy="50%" r="4" />
+                <circle class="hero-section__flow-node" cx="100%" cy="85%" r="4" />
+              </svg>
+
+              <!-- Skeleton Metrics on the right -->
+              <div class="hero-section__dashboard-metrics">
+                <div class="hero-section__metric-card">
+                  <div class="hero-section__skeleton-text hero-section__skeleton-text--tiny"></div>
+                  <div class="hero-section__skeleton-text hero-section__skeleton-text--medium"></div>
+                </div>
+                <div class="hero-section__metric-card">
+                  <div class="hero-section__skeleton-text hero-section__skeleton-text--tiny"></div>
+                  <div class="hero-section__skeleton-text hero-section__skeleton-text--medium"></div>
+                </div>
+                <div class="hero-section__metric-card">
+                  <div class="hero-section__skeleton-text hero-section__skeleton-text--tiny"></div>
+                  <div class="hero-section__skeleton-text hero-section__skeleton-text--medium"></div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+      <!-- Dashboard overlay -->
+      <div class="hero-section__overlay-wrapper" scrollReveal revealDirection="up"
+        [revealDelay]="isMobile() ? 200 : 2000">
+        <div class="hero-section__dashboard-overlay glass-card">
           <div class="hero-section__overlay-inner">
             <div>
-              <p class="hero-section__overlay-label">Live Dashboard</p>
-              <p class="hero-section__overlay-value">Campaign Performance: +24%</p>
+              <p class="hero-section__overlay-label">Live AI Optimization</p>
+              <p class="hero-section__overlay-value">Routing Budget: +24% ROI</p>
             </div>
             <div class="hero-section__overlay-icon">
-              <span class="material-symbols-outlined">trending_up</span>
+              <span class="material-symbols-outlined">auto_awesome</span>
             </div>
           </div>
         </div>
@@ -63,4 +154,3 @@
 
   <app-marquee-ribbons />
 </section>
-
