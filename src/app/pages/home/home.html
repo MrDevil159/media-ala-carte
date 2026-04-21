@@ -1,33 +1,35 @@
 <app-hero-section />
 
-@defer (on immediate) {
+<div spotlight class="home-wrapper">
+  @defer (on immediate) {
   <app-services-section />
-} @loading (after 100ms; minimum 400ms) {
+  } @loading (after 100ms; minimum 400ms) {
   <app-section-spinner />
-} @placeholder {
+  } @placeholder {
   <div style="min-height: 600px"></div>
-}
+  }
 
-@defer (on immediate) {
+  @defer (on immediate) {
   <app-why-us-section />
-} @loading (after 100ms; minimum 400ms) {
+  } @loading (after 100ms; minimum 400ms) {
   <app-section-spinner />
-} @placeholder {
+  } @placeholder {
   <div style="min-height: 700px"></div>
-}
+  }
 
-@defer (on immediate) {
+  @defer (on immediate) {
   <app-stats-section />
-} @loading (after 100ms; minimum 400ms) {
+  } @loading (after 100ms; minimum 400ms) {
   <app-section-spinner />
-} @placeholder {
+  } @placeholder {
   <div style="min-height: 500px"></div>
-}
+  }
 
-@defer (on immediate) {
+  @defer (on immediate) {
   <app-cta-section />
-} @loading (after 100ms; minimum 400ms) {
+  } @loading (after 100ms; minimum 400ms) {
   <app-section-spinner />
-} @placeholder {
+  } @placeholder {
   <div style="min-height: 400px"></div>
-}
+  }
+</div>

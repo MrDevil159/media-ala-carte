@@ -1,3 +1,6 @@
-:host {
-  display: block;
+.home-wrapper {
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
 }

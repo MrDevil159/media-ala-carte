@@ -21,32 +21,29 @@
         <!-- Stat cards -->
         <div class="stats-section__stat-grid">
           @for (stat of stats(); track stat.label; let i = $index) {
-            <div class="stats-section__stat" scrollReveal [revealDelay]="100 + i * 120" [class.stats-section__stat--full]="stat.fullWidth">
-              @if (stat.icon) {
-                <div class="stats-section__stat-inner">
-                  <div>
-                    <p [class]="'stats-section__value stats-section__value--' + stat.colorClass"
-                       countUp
-                       [countUpTarget]="stat.countTarget ?? 0"
-                       [countUpSuffix]="stat.countSuffix ?? ''"
-                       [countUpDecimals]="stat.countDecimals ?? 0">
-                    </p>
-                    <p class="stats-section__label">{{ stat.label }}</p>
-                  </div>
-                  <span [class]="'material-symbols-outlined stats-section__icon stats-section__value--' + stat.colorClass">
-                    {{ stat.icon }}
-                  </span>
-                </div>
-              } @else {
-                <p [class]="'stats-section__value stats-section__value--' + stat.colorClass"
-                   countUp
-                   [countUpTarget]="stat.countTarget ?? 0"
-                   [countUpSuffix]="stat.countSuffix ?? ''"
-                   [countUpDecimals]="stat.countDecimals ?? 0">
+          <div class="stats-section__stat" scrollReveal [revealDelay]="100 + i * 120"
+            [class.stats-section__stat--full]="stat.fullWidth">
+            @if (stat.icon) {
+            <div class="stats-section__stat-inner">
+              <div>
+                <p [class]="'stats-section__value stats-section__value--' + stat.colorClass" countUp
+                  [countUpTarget]="stat.countTarget ?? 0" [countUpSuffix]="stat.countSuffix ?? ''"
+                  [countUpDecimals]="stat.countDecimals ?? 0">
                 </p>
                 <p class="stats-section__label">{{ stat.label }}</p>
-              }
+              </div>
+              <span [class]="'material-symbols-outlined stats-section__icon stats-section__value--' + stat.colorClass">
+                {{ stat.icon }}
+              </span>
             </div>
+            } @else {
+            <p [class]="'stats-section__value stats-section__value--' + stat.colorClass" countUp
+              [countUpTarget]="stat.countTarget ?? 0" [countUpSuffix]="stat.countSuffix ?? ''"
+              [countUpDecimals]="stat.countDecimals ?? 0">
+            </p>
+            <p class="stats-section__label">{{ stat.label }}</p>
+            }
+          </div>
           }
         </div>
       </div>

@@ -3,13 +3,15 @@
 }
 
 .stats-section {
+  position: relative;
+  overflow: hidden;
   padding-block-start: 4rem;
   padding-block-end: 0;
 
   @media (width >= 1024px) {
     padding-block-start: 6rem;
   }
-  background-color: var(--color-surface);
+  background-color: transparent;
 
   &__inner {
     max-width: 80rem;

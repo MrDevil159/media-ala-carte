@@ -5,10 +5,11 @@ import { WhyUsSection } from './why-us-section/why-us-section';
 import { StatsSection } from './stats-section/stats-section';
 import { CtaSection } from './cta-section/cta-section';
 import { SectionSpinner } from '../../shared/section-spinner/section-spinner';
+import { SpotlightDirective } from '../../shared/spotlight/spotlight.directive';
 
 @Component({
   selector: 'app-home',
-  imports: [HeroSection, ServicesSection, WhyUsSection, StatsSection, CtaSection, SectionSpinner],
+  imports: [HeroSection, ServicesSection, WhyUsSection, StatsSection, CtaSection, SectionSpinner, SpotlightDirective],
   templateUrl: './home.html',
   styleUrl: './home.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
