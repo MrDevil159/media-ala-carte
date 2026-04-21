@@ -171,7 +171,7 @@
     border-top-left-radius: 1.25rem;
     border-top-right-radius: 1.25rem;
 
-    @media (width >= 640px) {
+    @media (width >=640px) {
       height: 52px;
       padding: 0 1.25rem;
     }
@@ -189,9 +189,19 @@
     position: relative;
     cursor: pointer;
 
-    &:nth-child(1) { background: var(--color-primary); }
-    &:nth-child(2) { background: var(--color-primary-dim); opacity: 0.6; }
-    &:nth-child(3) { background: var(--color-on-surface-variant); opacity: 0.4; }
+    &:nth-child(1) {
+      background: var(--color-primary);
+    }
+
+    &:nth-child(2) {
+      background: var(--color-primary-dim);
+      opacity: 0.6;
+    }
+
+    &:nth-child(3) {
+      background: var(--color-on-surface-variant);
+      opacity: 0.4;
+    }
   }
 
   &__dashboard-title {
@@ -465,6 +475,7 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
+    gap: 1.5rem;
   }
 
   &__overlay-label {

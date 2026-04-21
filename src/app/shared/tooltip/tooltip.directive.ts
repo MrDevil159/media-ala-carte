@@ -15,12 +15,13 @@ import {
 export class TooltipDirective implements OnDestroy {
   @Input('appTooltip') tooltipText = '';
   private tooltipElement: HTMLElement | null = null;
+  private lastCreateTime = 0;
   private renderer = inject(Renderer2);
   private el = inject(ElementRef);
 
   @HostListener('mouseenter')
   onMouseEnter() {
-    if (!this.tooltipText) return;
+    if (!this.tooltipText || this.tooltipElement) return;
     this.createTooltip();
   }
 
@@ -29,8 +30,26 @@ export class TooltipDirective implements OnDestroy {
     this.removeTooltip();
   }
 
-  @HostListener('mousedown')
-  onMouseDown() {
+  @HostListener('click', ['$event'])
+  onClick(event: MouseEvent) {
+    if (!this.tooltipText) return;
+    event.stopPropagation();
+
+    const now = Date.now();
+    if (this.tooltipElement && (now - this.lastCreateTime > 300)) {
+      this.removeTooltip();
+    } else if (!this.tooltipElement) {
+      this.createTooltip();
+    }
+  }
+
+  @HostListener('document:click')
+  onDocumentClick() {
+    this.removeTooltip();
+  }
+
+  @HostListener('window:scroll')
+  onScroll() {
     this.removeTooltip();
   }
 
@@ -39,6 +58,7 @@ export class TooltipDirective implements OnDestroy {
   }
 
   private createTooltip() {
+    this.lastCreateTime = Date.now();
     this.tooltipElement = this.renderer.createElement('div');
     this.renderer.addClass(this.tooltipElement, 'global-tooltip');
     
