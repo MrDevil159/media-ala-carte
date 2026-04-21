@@ -141,7 +141,7 @@
   &__dashboard-wrapper {
     position: relative;
     border-radius: 1.25rem;
-    overflow: hidden;
+    overflow: visible;
     border: 1px solid var(--color-border-subtle);
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
     background: var(--color-surface-container);
@@ -168,8 +168,10 @@
     align-items: center;
     justify-content: space-between;
     padding: 0 1rem;
+    border-top-left-radius: 1.25rem;
+    border-top-right-radius: 1.25rem;
 
-    @media (width >=640px) {
+    @media (width >= 640px) {
       height: 52px;
       padding: 0 1.25rem;
     }
@@ -187,54 +189,9 @@
     position: relative;
     cursor: pointer;
 
-    .hero-section__dashboard-tooltip {
-      position: absolute;
-      top: calc(100% + 8px);
-      left: 50%;
-      transform: translateX(-50%) translateY(-4px);
-      background: var(--color-surface-container-highest, #262627);
-      color: var(--color-on-surface);
-      padding: 0.25rem 0.5rem;
-      border-radius: 0.25rem;
-      font-size: 0.75rem;
-      white-space: nowrap;
-      pointer-events: none;
-      opacity: 0;
-      transition: opacity 0.2s ease, transform 0.2s ease;
-      z-index: 100;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
-
-      &::after {
-        content: '';
-        position: absolute;
-        top: auto;
-        bottom: 100%;
-        left: 50%;
-        transform: translateX(-50%);
-        border-width: 4px;
-        border-style: solid;
-        border-color: transparent transparent var(--color-surface-container-highest, #262627) transparent;
-      }
-    }
-
-    &:hover .hero-section__dashboard-tooltip {
-      opacity: 1;
-      transform: translateX(-50%) translateY(0);
-    }
-
-    &:nth-child(1) {
-      background: var(--color-primary);
-    }
-
-    &:nth-child(2) {
-      background: var(--color-primary-dim);
-      opacity: 0.6;
-    }
-
-    &:nth-child(3) {
-      background: var(--color-on-surface-variant);
-      opacity: 0.4;
-    }
+    &:nth-child(1) { background: var(--color-primary); }
+    &:nth-child(2) { background: var(--color-primary-dim); opacity: 0.6; }
+    &:nth-child(3) { background: var(--color-on-surface-variant); opacity: 0.4; }
   }
 
   &__dashboard-title {
@@ -381,6 +338,7 @@
     color: var(--color-primary);
     z-index: 2;
     box-shadow: 0 0 20px rgba(255, 139, 154, 0.4);
+    cursor: help;
 
     .material-symbols-outlined {
       font-size: 2.5rem;
@@ -407,19 +365,38 @@
     overflow: visible;
   }
 
+  &__flow-group {
+    cursor: pointer;
+
+    &:hover {
+      .hero-section__flow-line {
+        stroke: var(--color-primary);
+        stroke-width: 6px;
+        filter: drop-shadow(0 0 8px var(--color-primary));
+      }
+    }
+  }
+
+  &__flow-hit-area {
+    fill: none;
+    stroke: transparent;
+    stroke-width: 24px;
+    pointer-events: stroke;
+  }
+
   &__flow-line {
     fill: none;
     stroke: var(--color-border-subtle);
-    stroke-width: 3px;
-    stroke-dasharray: 8px 8px;
+    stroke-width: 5px;
+    stroke-dasharray: 7px 1px;
     animation: flow-dash 20s linear infinite;
+    pointer-events: none; // Let the hit-area handle interaction
+    transition: stroke 0.3s, stroke-width 0.3s, filter 0.3s;
 
-    &--active,
-    &:hover {
+    &--active {
       stroke: var(--color-primary);
-      stroke-width: 4px;
-      filter: drop-shadow(0 0 6px var(--color-primary));
-      cursor: pointer;
+      stroke-width: 6px;
+      filter: drop-shadow(0 0 8px var(--color-primary));
     }
   }
 
@@ -431,7 +408,7 @@
     transform-origin: center;
 
     &:hover {
-      transform: scale(1.5);
+      stroke-width: 5px;
       cursor: pointer;
     }
   }
@@ -456,6 +433,7 @@
     padding: 10px;
     box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
     transition: transform 0.3s ease, border-color 0.3s ease;
+    cursor: help;
 
     &:hover {
       transform: scale(1.05) translateX(-10px);

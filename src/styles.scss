@@ -131,3 +131,38 @@ body {
   }
 }
 
+.global-tooltip {
+  position: absolute;
+  background: var(--color-surface-container-highest, #262627);
+  color: var(--color-on-surface);
+  padding: 0.4rem 0.75rem;
+  border-radius: 0.4rem;
+  font-size: 0.75rem;
+  font-weight: 500;
+  white-space: nowrap;
+  pointer-events: none;
+  z-index: 9999;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+  border: 1px solid var(--color-border-subtle);
+  opacity: 0;
+  transform: translateY(-4px);
+  transition: opacity 0.2s ease, transform 0.2s ease;
+  backdrop-filter: blur(8px);
+
+  &--visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .global-tooltip-arrow {
+    content: '';
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    border-width: 5px;
+    border-style: solid;
+    border-color: var(--color-surface-container-highest, #262627) transparent transparent transparent;
+  }
+}
+

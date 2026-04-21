@@ -44,15 +44,9 @@
           <div class="hero-section__dashboard-top">
             <div class="hero-section__dashboard-title">Media Command Center</div>
             <div class="hero-section__dashboard-dots">
-              <span class="hero-section__dashboard-dot">
-                <div class="hero-section__dashboard-tooltip">Close</div>
-              </span>
-              <span class="hero-section__dashboard-dot">
-                <div class="hero-section__dashboard-tooltip">Minimize</div>
-              </span>
-              <span class="hero-section__dashboard-dot">
-                <div class="hero-section__dashboard-tooltip">Expand</div>
-              </span>
+              <span class="hero-section__dashboard-dot" appTooltip="Close"></span>
+              <span class="hero-section__dashboard-dot" appTooltip="Minimize"></span>
+              <span class="hero-section__dashboard-dot" appTooltip="Expand"></span>
             </div>
           </div>
 
@@ -61,7 +55,7 @@
             <!-- Left Panel: Channels -->
             <div class="hero-section__dashboard-channels">
               <!-- Channel: Digital -->
-              <div class="hero-section__dashboard-channel">
+              <div class="hero-section__dashboard-channel" appTooltip="Programmatic & Social Feed Integration">
                 <div class="hero-section__channel-icon"><span class="material-symbols-outlined">language</span></div>
                 <div class="hero-section__channel-info">
                   <div class="hero-section__skeleton-text hero-section__skeleton-text--short"></div>
@@ -71,7 +65,7 @@
                 </div>
               </div>
               <!-- Channel: TV -->
-              <div class="hero-section__dashboard-channel">
+              <div class="hero-section__dashboard-channel" appTooltip="Broadcast & Streaming Analytics">
                 <div class="hero-section__channel-icon"><span class="material-symbols-outlined">live_tv</span></div>
                 <div class="hero-section__channel-info">
                   <div class="hero-section__skeleton-text hero-section__skeleton-text--short"></div>
@@ -81,7 +75,7 @@
                 </div>
               </div>
               <!-- Channel: Radio -->
-              <div class="hero-section__dashboard-channel">
+              <div class="hero-section__dashboard-channel" appTooltip="Audio & Podcast Performance">
                 <div class="hero-section__channel-icon"><span class="material-symbols-outlined">podcasts</span></div>
                 <div class="hero-section__channel-info">
                   <div class="hero-section__skeleton-text hero-section__skeleton-text--short"></div>
@@ -95,17 +89,30 @@
             <!-- Right Panel: Data Flow & AI Core -->
             <div class="hero-section__dashboard-main">
               <!-- AI Core Pulsing -->
-              <div class="hero-section__dashboard-core">
+              <div class="hero-section__dashboard-core" appTooltip="Neural Core: Cross-platform ROI Optimization">
                 <div class="hero-section__core-pulse"></div>
                 <div class="hero-section__core-icon"><span class="material-symbols-outlined">psychology</span></div>
               </div>
 
               <!-- Data lines flowing from Core using percentage-based SVG -->
               <svg class="hero-section__dashboard-svg" preserveAspectRatio="none">
-                <line class="hero-section__flow-line" x1="0" y1="50%" x2="100%" y2="15%" />
-                <line class="hero-section__flow-line hero-section__flow-line--thick" x1="0" y1="50%" x2="100%"
-                  y2="50%" />
-                <line class="hero-section__flow-line hero-section__flow-line--alt" x1="0" y1="50%" x2="100%" y2="85%" />
+                <!-- Top Line Path -->
+                <g class="hero-section__flow-group">
+                  <line class="hero-section__flow-hit-area" x1="0" y1="50%" x2="100%" y2="15%" />
+                  <line class="hero-section__flow-line" x1="0" y1="50%" x2="100%" y2="15%" />
+                </g>
+
+                <!-- Middle Line Path -->
+                <g class="hero-section__flow-group">
+                  <line class="hero-section__flow-hit-area" x1="0" y1="50%" x2="100%" y2="50%" />
+                  <line class="hero-section__flow-line hero-section__flow-line--thick" x1="0" y1="50%" x2="100%" y2="50%" />
+                </g>
+
+                <!-- Bottom Line Path -->
+                <g class="hero-section__flow-group">
+                  <line class="hero-section__flow-hit-area" x1="0" y1="50%" x2="100%" y2="85%" />
+                  <line class="hero-section__flow-line hero-section__flow-line--alt" x1="0" y1="50%" x2="100%" y2="85%" />
+                </g>
 
                 <!-- Data nodes -->
                 <circle class="hero-section__flow-node" cx="100%" cy="15%" r="4" />
@@ -115,15 +122,15 @@
 
               <!-- Skeleton Metrics on the right -->
               <div class="hero-section__dashboard-metrics">
-                <div class="hero-section__metric-card">
+                <div class="hero-section__metric-card" appTooltip="Conversion Rate Optimization Trend">
                   <div class="hero-section__skeleton-text hero-section__skeleton-text--tiny"></div>
                   <div class="hero-section__skeleton-text hero-section__skeleton-text--medium"></div>
                 </div>
-                <div class="hero-section__metric-card">
+                <div class="hero-section__metric-card" appTooltip="Audience Reach & Frequency Analysis">
                   <div class="hero-section__skeleton-text hero-section__skeleton-text--tiny"></div>
                   <div class="hero-section__skeleton-text hero-section__skeleton-text--medium"></div>
                 </div>
-                <div class="hero-section__metric-card">
+                <div class="hero-section__metric-card" appTooltip="Real-time Budget Allocation Efficiency">
                   <div class="hero-section__skeleton-text hero-section__skeleton-text--tiny"></div>
                   <div class="hero-section__skeleton-text hero-section__skeleton-text--medium"></div>
                 </div>

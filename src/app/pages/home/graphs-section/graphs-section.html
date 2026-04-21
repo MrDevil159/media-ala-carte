@@ -8,15 +8,9 @@
         <div class="graphs-section__card graphs-section__card--overflow-unset">
           <div class="graphs-section__top">
             <div class="graphs-section__dots">
-              <span class="graphs-section__dot">
-                <div class="graphs-section__tooltip">Close</div>
-              </span>
-              <span class="graphs-section__dot">
-                <div class="graphs-section__tooltip">Minimize</div>
-              </span>
-              <span class="graphs-section__dot">
-                <div class="graphs-section__tooltip">Expand</div>
-              </span>
+              <span class="graphs-section__dot" appTooltip="Close"></span>
+              <span class="graphs-section__dot" appTooltip="Minimize"></span>
+              <span class="graphs-section__dot" appTooltip="Expand"></span>
             </div>
           </div>
 
@@ -47,9 +41,7 @@
               <div class="graphs-section__line-overlay">
                 @for (pt of g.linePoints ?? []; track pt.month) {
                 <div class="graphs-section__line-col">
-                  <div class="graphs-section__line-dot">
-                    <div class="graphs-section__tooltip">{{ pt.tooltip }}</div>
-                  </div>
+                  <div class="graphs-section__line-dot" [appTooltip]="pt.tooltip"></div>
                   <span class="graphs-section__month-label">{{ pt.month }}</span>
                 </div>
                 }
@@ -89,8 +81,7 @@
               <div class="graphs-section__bars">
                 @for (bar of g.bars ?? []; track bar.month) {
                 <div class="graphs-section__bar-col">
-                  <div class="graphs-section__bar-inner" [style.height]="bar.height + '%'">
-                    <div class="graphs-section__tooltip">{{ bar.tooltip }}</div>
+                  <div class="graphs-section__bar-inner" [style.height]="bar.height + '%'" [appTooltip]="bar.tooltip">
                   </div>
                 </div>
                 }
@@ -128,16 +119,7 @@
             <!-- ── Donut chart ─────────────────────────────────── -->
             } @else if (g.type === 'donut') {
             <div class="graphs-section__donut-wrap">
-              <div class="graphs-section__donut">
-                <!-- Tooltip panel shown when hovering the donut -->
-                <div class="graphs-section__donut-tip">
-                  @for (slice of g.donutSlices ?? []; track slice.label) {
-                  <div class="graphs-section__donut-tip-row">
-                    <span class="graphs-section__donut-tip-dot" [style.background]="slice.color"></span>
-                    <span>{{ slice.tooltip }}</span>
-                  </div>
-                  }
-                </div>
+              <div class="graphs-section__donut" appTooltip="62% Online<br>16% Posters<br>22% TV">
               </div>
             </div>
 
