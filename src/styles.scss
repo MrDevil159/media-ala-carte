@@ -106,3 +106,28 @@ body {
   backdrop-filter: blur(20px);
 }
 
+// Theme toggle — curtain wipe from top using View Transition API
+@keyframes theme-curtain-in {
+  from { clip-path: inset(0 0 100% 0); }
+  to   { clip-path: inset(0 0 0% 0); }
+}
+
+@keyframes theme-fade-out {
+  to { opacity: 0; }
+}
+
+::view-transition-new(root) {
+  animation: theme-curtain-in 0.5s cubic-bezier(0.4, 0, 0.2, 1) both;
+}
+
+::view-transition-old(root) {
+  animation: theme-fade-out 0.5s ease both;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  ::view-transition-new(root),
+  ::view-transition-old(root) {
+    animation: none;
+  }
+}
+

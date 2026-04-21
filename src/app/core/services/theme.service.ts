@@ -22,7 +22,59 @@ export class ThemeService {
   }
 
   toggle(): void {
-    this.isDark.update(v => !v);
+    const apply = () => this.isDark.update(v => !v);
+
+    if (!this.isBrowser) {
+      apply();
+      return;
+    }
+
+    const reducedMotion = this.doc.defaultView
+      ?.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    if (reducedMotion) {
+      apply();
+      return;
+    }
+
+    if ('startViewTransition' in this.doc) {
+      (this.doc as Document & { startViewTransition: (cb: () => void) => void })
+        .startViewTransition(apply);
+    } else {
+      this.curtainFallback(apply);
+    }
+  }
+
+  private curtainFallback(apply: () => void): void {
+    // Colour of the curtain = the background of the theme we're switching TO
+    const curtainColor = this.isDark() ? '#f4f4f6' : '#0e0e0f';
+
+    const overlay = this.doc.createElement('div');
+    overlay.setAttribute('aria-hidden', 'true');
+    overlay.style.cssText = [
+      'position:fixed',
+      'inset:0',
+      `background:${curtainColor}`,
+      'transform:translateY(-100%)',
+      'z-index:99999',
+      'pointer-events:none',
+    ].join(';');
+
+    this.doc.body.appendChild(overlay);
+
+    const opts: KeyframeAnimationOptions = { duration: 260, fill: 'forwards' };
+
+    overlay.animate(
+      [{ transform: 'translateY(-100%)' }, { transform: 'translateY(0)' }],
+      { ...opts, easing: 'ease-in' },
+    ).finished.then(() => {
+      apply();
+      return overlay.animate(
+        [{ transform: 'translateY(0)' }, { transform: 'translateY(100%)' }],
+        { ...opts, easing: 'ease-out' },
+      ).finished;
+    }).then(() => overlay.remove())
+      .catch(() => { apply(); overlay.remove(); });
   }
 }
 
