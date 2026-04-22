@@ -6,7 +6,7 @@
 
         <!-- Chart card -->
         <div class="graphs-section__card graphs-section__card--overflow-unset" scrollReveal
-          [revealDirection]="(i % 2) === 1 ? 'right' : 'left'">
+          [revealDirection]="(i % 2) === 1 ? 'right' : 'left'" spotlight tilt [tiltMax]="2">
           <div class="graphs-section__top">
             <div class="graphs-section__dots">
               <span class="graphs-section__dot" appTooltip="Close"></span>
@@ -49,7 +49,8 @@
               </div>
 
               @if (i === 0) {
-              <div class="graphs-section__floating graphs-section__floating--donut">
+              <div class="graphs-section__floating graphs-section__floating--donut" scrollReveal revealDirection="fade"
+                [revealDelay]="400" appTooltip="Real-time channel performance breakdown">
                 <div class="graphs-section__floating-label">Performance</div>
                 <div class="graphs-section__float-mini-donut-wrap">
                   <div class="graphs-section__float-mini-donut"></div>
@@ -62,7 +63,8 @@
               </div>
               }
               @if (i === 2) {
-              <div class="graphs-section__floating">
+              <div class="graphs-section__floating" scrollReveal revealDirection="fade" [revealDelay]="400"
+                appTooltip="Total audience reach across all platforms">
                 <div class="graphs-section__floating-label">Total Reach</div>
                 <div class="graphs-section__float-bars">
                   <span class="graphs-section__float-bar" style="height:45px"></span>
@@ -80,9 +82,10 @@
             } @else if (g.type === 'bars') {
             <div class="graphs-section__bars-wrap">
               <div class="graphs-section__bars">
-                @for (bar of g.bars ?? []; track bar.month) {
+                @for (bar of g.bars ?? []; track bar.month; let barIndex = $index) {
                 <div class="graphs-section__bar-col">
-                  <div class="graphs-section__bar-inner" [style.height]="bar.height + '%'" [appTooltip]="bar.tooltip">
+                   <div class="graphs-section__bar-inner" [style.height]="bar.height + '%'" [appTooltip]="bar.tooltip"
+                    scrollReveal revealDirection="fade" [revealDelay]="300 + (barIndex * 60)">
                   </div>
                 </div>
                 }
@@ -95,10 +98,12 @@
               </div>
 
               @if (i === 1) {
-              <div class="graphs-section__floating graphs-section__floating--metric">
+               <div class="graphs-section__floating graphs-section__floating--metric" scrollReveal revealDirection="fade"
+                [revealDelay]="400" appTooltip="Return on Investment growth over the last quarter">
                 <div class="graphs-section__floating-label">ROI Growth</div>
                 <div class="graphs-section__float-metric-wrap">
-                  <div class="graphs-section__float-metric-value">+324%</div>
+                  <div class="graphs-section__float-metric-value" countUp [countUpTarget]="324" countUpSuffix="%">+324%
+                  </div>
                   <svg class="graphs-section__float-metric-sparkline" viewBox="0 0 100 40" preserveAspectRatio="none">
                     <defs>
                       <linearGradient id="spark-grad" x1="0" x2="0" y1="0" y2="1">
@@ -146,7 +151,8 @@
             </div>
 
             @if (i === 3) {
-            <div class="graphs-section__floating graphs-section__floating--radar">
+            <div class="graphs-section__floating graphs-section__floating--radar" scrollReveal revealDirection="fade"
+              [revealDelay]="400" appTooltip="Operational and delivery efficiency metrics">
               <div class="graphs-section__floating-label">Efficiency</div>
               <div class="graphs-section__float-radar-wrap">
                 <svg class="graphs-section__float-radar" viewBox="0 0 100 100">

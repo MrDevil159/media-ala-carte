@@ -259,18 +259,28 @@
 .graphs-section__floating {
   display: none;
 
-  @media (width >=640px) {
+  @media (width >= 640px) {
     display: block;
     position: absolute;
     left: -3rem;
-    top: -6em;
+    top: -6rem;
     background: var(--color-surface-container-high);
     padding: 1rem 1.25rem;
     border-radius: 1.25rem;
     width: 190px;
     border: 1px solid var(--color-border-subtle);
-    box-shadow: 0 16px 32px rgba(0, 0, 0, .4);
+    box-shadow: 0 16px 32px rgba(0, 0, 0, 0.4);
+    animation: gs-float 6s ease-in-out infinite;
+
+    &:nth-of-type(even) {
+      animation-delay: -3s;
+    }
   }
+}
+
+@keyframes gs-float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-12px); }
 }
 
 .graphs-section__floating-label {
@@ -316,6 +326,7 @@
       var(--color-surface-container-highest, #262627) 75% 100%);
   position: relative;
   flex-shrink: 0;
+  transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
 
   &::before {
     content: '';
@@ -323,6 +334,10 @@
     inset: 12px;
     background: var(--color-surface-container-high);
     border-radius: 50%;
+  }
+
+  &:hover {
+    transform: scale(1.1) rotate(15deg);
   }
 }
 
@@ -361,7 +376,18 @@
   width: 100%;
   height: 40px;
   overflow: visible;
+
+  path {
+    stroke-dasharray: 200;
+    stroke-dashoffset: 200;
+    animation: gs-draw-spark 3s ease forwards 0.6s;
+  }
 }
+
+@keyframes gs-draw-spark {
+  to { stroke-dashoffset: 0; }
+}
+
 
 // ─── Floating Radar Chart ────────────────────────────────────────────────────
 .graphs-section__floating--radar {
@@ -423,24 +449,30 @@
   width: 100%;
   border-radius: 10px 10px 4px 4px;
   background: linear-gradient(180deg, var(--color-primary), var(--color-secondary));
-  transition: transform 0.3s ease, filter 0.3s ease;
+  transition: 
+    transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1), 
+    filter 0.3s ease, 
+    opacity 0.6s ease;
   cursor: pointer;
   position: relative;
+  transform-origin: bottom;
 
-  .graphs-section__tooltip {
-    bottom: calc(100% + 8px);
-    left: 50%;
-    transform: translateX(-50%) translateY(4px);
+  // Custom reveal for bars
+  &.scroll-reveal {
+    opacity: 0;
+    transform: scaleY(0);
+    transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.8s ease;
+
+    &.is-revealed {
+      opacity: 1;
+      transform: scaleY(1);
+    }
   }
 
   &:hover {
-    transform: scaleY(1.05);
+    transform: scaleY(1.08) scaleX(1.02);
     filter: brightness(1.2);
-
-    .graphs-section__tooltip {
-      opacity: 1;
-      transform: translateX(-50%) translateY(0);
-    }
+    z-index: 10;
   }
 }
 
@@ -460,6 +492,7 @@
       var(--color-primary-dim) 78% 100%);
   position: relative;
   cursor: pointer;
+  transition: transform 0.3s ease;
 
   @media (width >=480px) {
     width: 160px;
