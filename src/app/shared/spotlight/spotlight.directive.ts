@@ -1,71 +1,81 @@
-import { afterNextRender, Directive, ElementRef, HostListener, inject, OnDestroy, Renderer2 } from '@angular/core';
+import { afterNextRender, Directive, ElementRef, inject, OnDestroy, Renderer2 } from '@angular/core';
 
 @Directive({
   selector: '[spotlight]',
   standalone: true,
+  host: {
+    '(mousemove)': 'onMove($event)',
+    '(mouseleave)': 'leave()',
+  }
 })
 export class SpotlightDirective implements OnDestroy {
-  private readonly el = inject(ElementRef<HTMLElement>);
+  private readonly el = inject(ElementRef<HTMLElement>).nativeElement;
   private readonly renderer = inject(Renderer2);
-  private glowEl: HTMLElement | null = null;
+  
+  private glowEl?: HTMLElement;
   private rafId = 0;
-  private lastMouseX = -1;
-  private lastMouseY = -1;
+  private mouseX = -1;
+  private mouseY = -1;
+  private unlistenScroll?: () => void;
 
   constructor() {
     afterNextRender(() => {
-      const glow: HTMLElement = this.renderer.createElement('div');
-      this.renderer.addClass(glow, 'spotlight-glow');
-      this.renderer.appendChild(this.el.nativeElement, glow);
-      this.glowEl = glow;
+      const observer = new IntersectionObserver(([entry]) => {
+        if (entry.isIntersecting) {
+          this.initGlow();
+          observer.disconnect();
+        }
+      }, { rootMargin: '100px' });
+      
+      observer.observe(this.el);
     });
   }
 
-  ngOnDestroy(): void {
-    if (this.rafId) cancelAnimationFrame(this.rafId);
+  private initGlow(): void {
+    this.glowEl = this.renderer.createElement('div');
+    this.renderer.addClass(this.glowEl, 'spotlight-glow');
+    this.renderer.appendChild(this.el, this.glowEl);
   }
 
-  @HostListener('mousemove', ['$event'])
   onMove(e: MouseEvent): void {
-    this.lastMouseX = e.clientX;
-    this.lastMouseY = e.clientY;
-    this.updateSpotlight();
-  }
+    this.mouseX = e.clientX;
+    this.mouseY = e.clientY;
 
-  @HostListener('window:scroll')
-  onScroll(): void {
-    if (this.lastMouseX !== -1) {
-      this.updateSpotlight();
+    if (!this.unlistenScroll) {
+      this.unlistenScroll = this.renderer.listen('window', 'scroll', () => this.update());
     }
+
+    this.update();
   }
 
-  private updateSpotlight(): void {
-    if (!this.glowEl) return;
-    if (window.matchMedia('(hover: none), (pointer: coarse)').matches) return;
-
-    if (this.rafId) cancelAnimationFrame(this.rafId);
+  update(): void {
+    if (this.rafId || this.mouseX === -1 || !this.glowEl || window.matchMedia('(hover: none)').matches) return;
 
     this.rafId = requestAnimationFrame(() => {
       this.rafId = 0;
-      if (!this.glowEl) return;
-
-      const rect = this.el.nativeElement.getBoundingClientRect();
-      const x = this.lastMouseX - rect.left;
-      const y = this.lastMouseY - rect.top;
-
-      this.glowEl.style.transform = `translate3d(${x}px, ${y}px, 0)`;
-      this.glowEl.style.opacity = '1';
+      const rect = this.el.getBoundingClientRect();
+      const x = this.mouseX - rect.left;
+      const y = this.mouseY - rect.top;
+      this.glowEl!.style.transform = `translate3d(${x}px, ${y}px, 0)`;
+      this.glowEl!.style.opacity = '1';
     });
   }
 
-  @HostListener('mouseleave')
-  onLeave(): void {
-    this.lastMouseX = -1;
-    this.lastMouseY = -1;
+  leave(): void {
+    this.mouseX = -1;
+    if (this.unlistenScroll) {
+      this.unlistenScroll();
+      this.unlistenScroll = undefined;
+    }
+
     if (this.rafId) {
       cancelAnimationFrame(this.rafId);
       this.rafId = 0;
     }
     if (this.glowEl) this.glowEl.style.opacity = '0';
+  }
+
+  ngOnDestroy(): void {
+    this.leave();
   }
 }
