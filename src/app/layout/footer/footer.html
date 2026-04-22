@@ -36,7 +36,7 @@
       <h4 class="footer-column__heading">Contact Us</h4>
       <address class="footer-contact__address">
         <div class="footer-contact__row">
-          <span class="material-symbols-outlined footer-contact__icon footer-contact__icon--primary">location_on</span>
+          <span class="material-symbols-outlined footer-contact__icon">location_on</span>
           <div>
             @for (line of contactAddress(); track line) {
               <p>{{ line }}</p>
@@ -44,7 +44,7 @@
           </div>
         </div>
         <div class="footer-contact__row">
-          <span class="material-symbols-outlined footer-contact__icon footer-contact__icon--primary">mail</span>
+          <span class="material-symbols-outlined footer-contact__icon">mail</span>
           <a class="footer-contact__email" [href]="'mailto:' + contactEmail()">{{ contactEmail() }}</a>
         </div>
       </address>

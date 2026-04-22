@@ -122,10 +122,7 @@
     font-size: 1.25rem !important;
     flex-shrink: 0;
     margin-top: 0.1rem;
-
-    &--primary {
-      color: var(--color-primary);
-    }
+    color: var(--color-primary);
   }
 
   &__email {
