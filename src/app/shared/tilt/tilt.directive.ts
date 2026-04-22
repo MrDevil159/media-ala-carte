@@ -1,11 +1,8 @@
-import { Directive, ElementRef, inject, input, numberAttribute, OnDestroy, Renderer2 } from '@angular/core';
+import { Directive, ElementRef, inject, input, numberAttribute, OnDestroy, Renderer2, afterNextRender } from '@angular/core';
+import { fromEvent, Subject, takeUntil } from 'rxjs';
 
 @Directive({
   selector: '[tilt]',
-  host: {
-    '(mousemove)': 'onMove($event)',
-    '(mouseleave)': 'onLeave()',
-  }
 })
 export class TiltDirective implements OnDestroy {
   readonly max = input(10, { transform: numberAttribute, alias: 'tiltMax' });
@@ -13,6 +10,19 @@ export class TiltDirective implements OnDestroy {
   private readonly el = inject(ElementRef<HTMLElement>).nativeElement;
   private readonly renderer = inject(Renderer2);
   private rafId = 0;
+  private destroy$ = new Subject<void>();
+
+  constructor() {
+    afterNextRender(() => {
+      fromEvent<MouseEvent>(this.el, 'mousemove')
+        .pipe(takeUntil(this.destroy$))
+        .subscribe(e => this.onMove(e));
+        
+      fromEvent<MouseEvent>(this.el, 'mouseleave')
+        .pipe(takeUntil(this.destroy$))
+        .subscribe(() => this.onLeave());
+    });
+  }
 
   onMove(e: MouseEvent): void {
     if (this.rafId || window.matchMedia('(hover: none), (prefers-reduced-motion: reduce)').matches) return;
@@ -36,6 +46,8 @@ export class TiltDirective implements OnDestroy {
   }
 
   ngOnDestroy(): void {
+    this.destroy$.next();
+    this.destroy$.complete();
     this.onLeave();
   }
 }

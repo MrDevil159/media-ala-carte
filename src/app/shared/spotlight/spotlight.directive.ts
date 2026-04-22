@@ -1,12 +1,9 @@
 import { afterNextRender, Directive, ElementRef, inject, OnDestroy, Renderer2 } from '@angular/core';
+import { fromEvent, Subject, takeUntil } from 'rxjs';
 
 @Directive({
   selector: '[spotlight]',
   standalone: true,
-  host: {
-    '(mousemove)': 'onMove($event)',
-    '(mouseleave)': 'leave()',
-  }
 })
 export class SpotlightDirective implements OnDestroy {
   private readonly el = inject(ElementRef<HTMLElement>).nativeElement;
@@ -17,6 +14,7 @@ export class SpotlightDirective implements OnDestroy {
   private mouseX = -1;
   private mouseY = -1;
   private unlistenScroll?: () => void;
+  private destroy$ = new Subject<void>();
 
   constructor() {
     afterNextRender(() => {
@@ -27,7 +25,16 @@ export class SpotlightDirective implements OnDestroy {
         }
       }, { rootMargin: '100px' });
       
+      
       observer.observe(this.el);
+
+      fromEvent<MouseEvent>(this.el, 'mousemove')
+        .pipe(takeUntil(this.destroy$))
+        .subscribe(e => this.onMove(e));
+
+      fromEvent<MouseEvent>(this.el, 'mouseleave')
+        .pipe(takeUntil(this.destroy$))
+        .subscribe(() => this.leave());
     });
   }
 
@@ -76,6 +83,8 @@ export class SpotlightDirective implements OnDestroy {
   }
 
   ngOnDestroy(): void {
+    this.destroy$.next();
+    this.destroy$.complete();
     this.leave();
   }
 }

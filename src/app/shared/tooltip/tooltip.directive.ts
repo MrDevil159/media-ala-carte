@@ -1,14 +1,10 @@
 import { DOCUMENT } from '@angular/common';
-import { Directive, ElementRef, inject, input, OnDestroy, Renderer2 } from '@angular/core';
+import { Directive, ElementRef, inject, input, OnDestroy, Renderer2, afterNextRender } from '@angular/core';
+import { fromEvent, Subject, takeUntil } from 'rxjs';
 
 @Directive({
   selector: '[appTooltip]',
   standalone: true,
-  host: {
-    '(mouseenter)': 'show()',
-    '(mouseleave)': 'hide()',
-    '(click)': 'toggle($event)',
-  }
 })
 export class TooltipDirective implements OnDestroy {
   readonly text = input('', { alias: 'appTooltip' });
@@ -20,6 +16,23 @@ export class TooltipDirective implements OnDestroy {
   private tooltipEl?: HTMLElement;
   private unlistens: (() => void)[] = [];
   private lastOpen = 0;
+  private destroy$ = new Subject<void>();
+
+  constructor() {
+    afterNextRender(() => {
+      fromEvent<MouseEvent>(this.el, 'mouseenter')
+        .pipe(takeUntil(this.destroy$))
+        .subscribe(() => this.show());
+
+      fromEvent<MouseEvent>(this.el, 'mouseleave')
+        .pipe(takeUntil(this.destroy$))
+        .subscribe(() => this.hide());
+
+      fromEvent<MouseEvent>(this.el, 'click')
+        .pipe(takeUntil(this.destroy$))
+        .subscribe((e) => this.toggle(e));
+    });
+  }
 
   show() {
     if (!this.text() || this.tooltipEl) return;
@@ -83,6 +96,8 @@ export class TooltipDirective implements OnDestroy {
   }
 
   ngOnDestroy() {
+    this.destroy$.next();
+    this.destroy$.complete();
     this.hide();
   }
 }
