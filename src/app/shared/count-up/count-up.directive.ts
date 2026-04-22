@@ -1,83 +1,42 @@
-import {
-  afterNextRender,
-  Directive,
-  ElementRef,
-  inject,
-  input,
-  numberAttribute,
-  OnDestroy,
-} from '@angular/core';
+import { Directive, ElementRef, inject, input, numberAttribute, Renderer2, afterNextRender } from '@angular/core';
+import { animationFrames, map, takeWhile, endWith } from 'rxjs';
 
-@Directive({
-  selector: '[countUp]',
-})
-export class CountUpDirective implements OnDestroy {
-  readonly countUpTarget = input.required<number>();
-  readonly countUpSuffix = input('');
-  readonly countUpDecimals = input(0, { transform: numberAttribute });
-  readonly countUpDuration = input(1600, { transform: numberAttribute });
+@Directive({ selector: '[countUp]', standalone: true })
+export class CountUpDirective {
+  readonly target = input.required<number>({ alias: 'countUpTarget' });
+  readonly suffix = input('', { alias: 'countUpSuffix' });
+  readonly decimals = input(0, { transform: numberAttribute, alias: 'countUpDecimals' });
+  readonly duration = input(1600, { transform: numberAttribute, alias: 'countUpDuration' });
 
-  private readonly el = inject(ElementRef<HTMLElement>);
-  private observer?: IntersectionObserver;
-  private rafId?: number;
+  private readonly el = inject(ElementRef).nativeElement;
+  private readonly renderer = inject(Renderer2);
 
   constructor() {
     afterNextRender(() => {
-      const suffix = this.countUpSuffix();
-      const decimals = this.countUpDecimals();
-      this.el.nativeElement.textContent = (0).toFixed(decimals) + suffix;
-
-      if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-        this.showFinal();
-        return;
-      }
-
-      this.observer = new IntersectionObserver(
-        (entries) => {
-          for (const entry of entries) {
-            if (entry.isIntersecting) {
-              this.startCount();
-              this.observer?.disconnect();
-            }
-          }
-        },
-        { threshold: 0.4 }
-      );
-
-      this.observer.observe(this.el.nativeElement);
+      this.update(0);
+      new IntersectionObserver(([e], obs) => {
+        if (e.isIntersecting) {
+          this.startAnimation();
+          obs.disconnect();
+        }
+      }, { threshold: 0.4 }).observe(this.el);
     });
   }
 
-  private showFinal(): void {
-    const target = this.countUpTarget();
-    const decimals = this.countUpDecimals();
-    this.el.nativeElement.textContent = target.toFixed(decimals) + this.countUpSuffix();
+  private startAnimation() {
+    const duration = this.duration();
+    animationFrames().pipe(
+      map(({ elapsed }) => Math.min(elapsed / duration, 1)),
+      takeWhile(p => p < 1),
+      endWith(1)
+    ).subscribe(p => {
+      const eased = 1 - Math.pow(1 - p, 3);
+      this.update(eased * this.target());
+    });
   }
 
-  private startCount(): void {
-    const target = this.countUpTarget();
-    const suffix = this.countUpSuffix();
-    const decimals = this.countUpDecimals();
-    const duration = this.countUpDuration();
-    const start = performance.now();
-    const el = this.el.nativeElement;
-
-    const tick = (now: number) => {
-      const elapsed = now - start;
-      const progress = Math.min(elapsed / duration, 1);
-      const eased = 1 - Math.pow(1 - progress, 3);
-      el.textContent = (eased * target).toFixed(decimals) + suffix;
-
-      if (progress < 1) {
-        this.rafId = requestAnimationFrame(tick);
-      }
-    };
-
-    this.rafId = requestAnimationFrame(tick);
-  }
-
-  ngOnDestroy(): void {
-    this.observer?.disconnect();
-    if (this.rafId !== undefined) cancelAnimationFrame(this.rafId);
+  private update(v: number) {
+    const text = v.toFixed(this.decimals()) + this.suffix();
+    this.renderer.setProperty(this.el, 'textContent', text);
   }
 }

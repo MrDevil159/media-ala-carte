@@ -1,64 +1,35 @@
-import {
-  afterNextRender,
-  Directive,
-  ElementRef,
-  inject,
-  input,
-  numberAttribute,
-  OnDestroy,
-  signal,
-} from '@angular/core';
-
-type RevealDirection = 'up' | 'left' | 'right' | 'fade';
+import { afterNextRender, Directive, ElementRef, inject, input, numberAttribute, signal } from '@angular/core';
 
 @Directive({
   selector: '[scrollReveal]',
+  standalone: true,
   host: {
-    class: 'scroll-reveal',
-    '[class.scroll-reveal--up]': 'revealDirection() === "up"',
-    '[class.scroll-reveal--left]': 'revealDirection() === "left"',
-    '[class.scroll-reveal--right]': 'revealDirection() === "right"',
-    '[class.scroll-reveal--fade]': 'revealDirection() === "fade"',
+    'class': 'scroll-reveal',
     '[class.is-revealed]': 'isRevealed()',
-  },
+    '[class.scroll-reveal--up]': 'direction() === "up"',
+    '[class.scroll-reveal--left]': 'direction() === "left"',
+    '[class.scroll-reveal--right]': 'direction() === "right"',
+    '[class.scroll-reveal--fade]': 'direction() === "fade"',
+  }
 })
-export class ScrollRevealDirective implements OnDestroy {
-  readonly revealDelay = input(0, { transform: numberAttribute });
-  readonly revealDirection = input<RevealDirection>('up');
+export class ScrollRevealDirective {
+  readonly delay = input(0, { transform: numberAttribute, alias: 'revealDelay' });
+  readonly direction = input<'up' | 'left' | 'right' | 'fade'>('up', { alias: 'revealDirection' });
 
-  private readonly el = inject(ElementRef<HTMLElement>);
+  private readonly el = inject(ElementRef).nativeElement;
   protected readonly isRevealed = signal(false);
-  private observer?: IntersectionObserver;
 
   constructor() {
     afterNextRender(() => {
       if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-        this.isRevealed.set(true);
-        return;
+        return this.isRevealed.set(true);
       }
-
-      this.observer = new IntersectionObserver(
-        (entries) => {
-          for (const entry of entries) {
-            if (entry.isIntersecting) {
-              const delay = this.revealDelay();
-              if (delay > 0) {
-                setTimeout(() => this.isRevealed.set(true), delay);
-              } else {
-                this.isRevealed.set(true);
-              }
-              this.observer?.disconnect();
-            }
-          }
-        },
-        { threshold: 0.1, rootMargin: '0px 0px -20px 0px' }
-      );
-
-      this.observer.observe(this.el.nativeElement);
+      new IntersectionObserver(([entry], obs) => {
+        if (entry.isIntersecting) {
+          setTimeout(() => this.isRevealed.set(true), this.delay());
+          obs.disconnect();
+        }
+      }, { threshold: 0.1, rootMargin: '0px 0px -20px 0px' }).observe(this.el);
     });
-  }
-
-  ngOnDestroy(): void {
-    this.observer?.disconnect();
   }
 }
