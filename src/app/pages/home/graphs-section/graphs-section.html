@@ -5,7 +5,8 @@
       <div class="graphs-section__row" [class.graphs-section__row--reverse]="(i % 2) === 1">
 
         <!-- Chart card -->
-        <div class="graphs-section__card graphs-section__card--overflow-unset">
+        <div class="graphs-section__card graphs-section__card--overflow-unset" scrollReveal
+          [revealDirection]="(i % 2) === 1 ? 'right' : 'left'">
           <div class="graphs-section__top">
             <div class="graphs-section__dots">
               <span class="graphs-section__dot" appTooltip="Close"></span>
@@ -172,7 +173,8 @@
         </div>
 
         <!-- Copy -->
-        <div class="graphs-section__description">
+        <div class="graphs-section__description" scrollReveal [revealDirection]="(i % 2) === 1 ? 'left' : 'right'"
+          [revealDelay]="100">
           <span class="graphs-section__badge">{{ g.badge }}</span>
           <h3 class="graphs-section__title">{{ g.title }}</h3>
           <p class="graphs-section__label">{{ g.desc }}</p>

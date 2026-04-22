@@ -1,5 +1,6 @@
 import { ChangeDetectionStrategy, Component, signal } from '@angular/core';
 import { TooltipDirective } from '../../../shared/tooltip/tooltip.directive';
+import { ScrollRevealDirective } from '../../../shared/scroll-reveal/scroll-reveal.directive';
 
 export interface BarPoint  { month: string; height: number; tooltip: string; }
 export interface LinePoint { month: string; tooltip: string; }
@@ -20,7 +21,7 @@ export interface GraphItem {
   selector: 'app-graphs-section',
   templateUrl: './graphs-section.html',
   styleUrl: './graphs-section.scss',
-  imports: [TooltipDirective],
+  imports: [TooltipDirective, ScrollRevealDirective],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class GraphsSectionComponent {
