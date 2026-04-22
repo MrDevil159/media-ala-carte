@@ -13,15 +13,14 @@ import { CountUpDirective } from '../../../shared/count-up/count-up.directive';
 })
 export class StatsSection {
   protected readonly stats = signal<StatItem[]>([
-    { value: '110+', countTarget: 110, countSuffix: '+', label: 'Top Agencies', colorClass: 'primary' },
-    { value: '1M', countTarget: 1, countSuffix: 'M', label: 'Advertisers', colorClass: 'primary' },
+    { value: '110+', countTarget: 110, countSuffix: '+', label: 'Top Agencies' },
+    { value: '1M', countTarget: 1, countSuffix: 'M', label: 'Advertisers' },
     {
       value: '98.99%',
       countTarget: 98.99,
       countSuffix: '%',
       countDecimals: 2,
       label: 'Seamless Transactions',
-      colorClass: 'primary',
       icon: 'verified',
       fullWidth: true,
     },

@@ -26,18 +26,18 @@
             @if (stat.icon) {
             <div class="stats-section__stat-inner">
               <div>
-                <p [class]="'stats-section__value stats-section__value--' + stat.colorClass" countUp
+                <p class="stats-section__value" countUp
                   [countUpTarget]="stat.countTarget ?? 0" [countUpSuffix]="stat.countSuffix ?? ''"
                   [countUpDecimals]="stat.countDecimals ?? 0">
                 </p>
                 <p class="stats-section__label">{{ stat.label }}</p>
               </div>
-              <span [class]="'material-symbols-outlined stats-section__icon stats-section__value--' + stat.colorClass">
+              <span class="material-symbols-outlined stats-section__icon">
                 {{ stat.icon }}
               </span>
             </div>
             } @else {
-            <p [class]="'stats-section__value stats-section__value--' + stat.colorClass" countUp
+            <p class="stats-section__value" countUp
               [countUpTarget]="stat.countTarget ?? 0" [countUpSuffix]="stat.countSuffix ?? ''"
               [countUpDecimals]="stat.countDecimals ?? 0">
             </p>

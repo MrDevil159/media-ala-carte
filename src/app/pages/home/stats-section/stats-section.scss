@@ -120,13 +120,12 @@
     font-size: 2.25rem;
     font-weight: 800;
     margin-bottom: 0.5rem;
-
-    &--primary { color: var(--color-primary); }
-    &--secondary { color: var(--color-primary); }
+    color: var(--color-primary);
   }
 
   &__icon {
     font-size: 3rem !important;
+    color: var(--color-primary);
   }
 
   &__label {

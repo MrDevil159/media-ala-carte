@@ -402,12 +402,6 @@
     animation: flow-dash 20s linear infinite;
     pointer-events: none; // Let the hit-area handle interaction
     transition: stroke 0.3s, stroke-width 0.3s, filter 0.3s;
-
-    &--active {
-      stroke: var(--color-primary);
-      stroke-width: 6px;
-      filter: drop-shadow(0 0 8px var(--color-primary));
-    }
   }
 
   &__flow-node {

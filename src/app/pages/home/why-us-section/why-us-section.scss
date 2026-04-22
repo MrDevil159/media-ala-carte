@@ -139,8 +139,3 @@
     transform: scale(1) rotate(0deg);
   }
 }
-
-@keyframes check-pop {
-  from { transform: scale(0) rotate(-30deg); }
-  to   { transform: scale(1) rotate(0deg); }
-}

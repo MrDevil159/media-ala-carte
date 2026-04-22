@@ -3,10 +3,8 @@ export interface ServiceCard {
   readonly imageAlt: string;
   readonly imagePosition?: string;
   readonly badge: string;
-  readonly badgeColor: 'primary' | 'secondary';
   readonly title: string;
   readonly description: string;
-  readonly accentColor: 'primary' | 'secondary';
 }
 
 export interface FeatureCard {
@@ -20,7 +18,6 @@ export interface FeatureCard {
 export interface StatItem {
   readonly value: string;
   readonly label: string;
-  readonly colorClass: 'primary' | 'secondary';
   readonly icon?: string;
   readonly fullWidth?: boolean;
   readonly countTarget?: number;

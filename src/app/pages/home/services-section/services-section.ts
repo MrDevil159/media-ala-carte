@@ -41,33 +41,27 @@ export class ServicesSection {
       imageAlt: 'Sophisticated workspace with analytics monitors',
       imagePosition: 'center left',
       badge: 'FOR BRANDS',
-      badgeColor: 'primary',
       title: 'Advertisers',
       description:
         'Create, distribute and manage your campaign across multiple channels.',
-      accentColor: 'primary',
     },
     {
       imageUrl: '/assets/agencies.webp',
       imageAlt: 'Creative agency team brainstorming around interactive table',
       imagePosition: 'center right',
       badge: 'FOR TEAMS',
-      badgeColor: 'primary',
       title: 'Agencies',
       description:
         'Get new clients and contracts and enhance the workflow with automatised tools.',
-      accentColor: 'primary',
     },
     {
       imageUrl: '/assets/media_owners.webp',
       imageAlt: 'High-tech broadcast master control room',
       imagePosition: 'center left',
       badge: 'FOR PUBLISHERS',
-      badgeColor: 'primary',
       title: 'Media Owners',
       description:
         'Get a new stream of bookings, manage campaigns and contracts all in one place.',
-      accentColor: 'primary',
     },
   ]);
 }

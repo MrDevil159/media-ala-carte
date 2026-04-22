@@ -5,7 +5,7 @@
       <div class="graphs-section__row" [class.graphs-section__row--reverse]="(i % 2) === 1">
 
         <!-- Chart card -->
-        <div class="graphs-section__card graphs-section__card--overflow-unset" scrollReveal
+        <div class="graphs-section__card" scrollReveal
           [revealDirection]="(i % 2) === 1 ? 'right' : 'left'" spotlight tilt [tiltMax]="2">
           <div class="graphs-section__top">
             <div class="graphs-section__dots">
@@ -30,7 +30,7 @@
                     <stop offset="100%" stop-color="var(--color-primary)" stop-opacity="0" />
                   </linearGradient>
                 </defs>
-                <path class="graphs-section__area"
+                <path
                   d="M10 130 C90 110 120 55 180 75 S280 140 340 120 S430 70 490 95 L490 200 L10 200Z"
                   [attr.fill]="'url(#grad' + i + ')'">
                 </path>
@@ -136,7 +136,7 @@
                 <span class="graphs-section__slice-dot" [style.background]="slice.color"></span>
                 {{ slice.label }} <strong>{{ slice.pct }}%</strong>
                 @if (!last) {
-                <span class="graphs-section__separator"> · </span>
+                <span> · </span>
                 }
               </div>
               }
