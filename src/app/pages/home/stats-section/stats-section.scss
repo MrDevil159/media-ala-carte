@@ -1,12 +1,14 @@
+@use '../../../../styles/mixins' as *;
+
 :host {
   display: block;
 }
 
 .stats-section {
-  position: relative;
   overflow: hidden;
   padding-block-start: 4rem;
   padding-block-end: 0;
+  @include glow-separator(true);
 
   @media (width >= 1024px) {
     padding-block-start: 6rem;
@@ -126,6 +128,12 @@
   &__icon {
     font-size: 3rem !important;
     color: var(--color-primary);
+    transition: transform 0.3s ease, filter 0.3s ease;
+  }
+
+  &__stat:hover &__icon {
+    transform: scale(1.15);
+    filter: drop-shadow(0 0 8px rgba(255, 139, 154, 0.5));
   }
 
   &__label {

@@ -1,16 +1,17 @@
 <header class="site-header" [class.site-header--scrolled]="isScrolled()">
   <nav class="header-nav">
-    <a routerLink="/">
+    <a (click)="scrollToTop()" style="cursor:pointer">
       <img ngSrc="/assets/logo.webp" alt="Media Alacarte" height="44" width="160" />
     </a>
 
     <div class="header-nav__links">
       @for (link of navLinks(); track link.label) {
-        <a [routerLink]="link.path"
+        <button type="button"
            class="nav-link"
-           [class.nav-link--active]="link.isActive">
+           [class.nav-link--active]="activeSection() === link.sectionId"
+           (click)="scrollTo(link.sectionId)">
           {{ link.label }}
-        </a>
+        </button>
       }
     </div>
 
@@ -36,11 +37,12 @@
   @if (mobileMenuOpen()) {
     <nav id="mobile-nav" class="mobile-nav">
       @for (link of navLinks(); track link.label) {
-        <a [routerLink]="link.path"
+        <button type="button"
            class="mobile-nav__link"
-           [class.mobile-nav__link--active]="link.isActive">
+           [class.mobile-nav__link--active]="activeSection() === link.sectionId"
+           (click)="scrollTo(link.sectionId)">
           {{ link.label }}
-        </a>
+        </button>
       }
       <div class="mobile-nav__footer">
         <button type="button" class="mobile-nav__theme-toggle" (click)="theme.toggle()">

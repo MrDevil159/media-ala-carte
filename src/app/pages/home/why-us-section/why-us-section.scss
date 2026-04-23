@@ -1,3 +1,5 @@
+@use '../../../../styles/mixins' as *;
+
 :host {
   display: block;
 }
@@ -8,8 +10,8 @@
   @media (width >= 1024px) {
     padding: 8rem 2rem;
   }
-  position: relative;
   overflow: hidden;
+  @include glow-separator(true);
 
   &__inner {
     max-width: 80rem;
@@ -103,6 +105,12 @@
     display: flex;
     align-items: flex-start;
     gap: 1rem;
+    transition: transform 0.25s ease;
+    cursor: default;
+
+    &:hover {
+      transform: translateX(6px);
+    }
   }
 
   &__check-icon {

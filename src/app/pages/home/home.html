@@ -32,4 +32,12 @@
   } @placeholder {
   <div style="min-height: 400px"></div>
   }
+
+  @defer (on immediate) {
+  <app-contact-section />
+  } @loading (after 100ms; minimum 400ms) {
+  <app-section-spinner />
+  } @placeholder {
+  <div style="min-height: 400px"></div>
+  }
 </div>

@@ -62,6 +62,12 @@
     font-weight: 700;
     color: var(--color-on-primary-fixed);
     padding-inline: clamp(1rem, 3vw, 2rem);
+    transition: transform 0.2s ease;
+    cursor: default;
+
+    &:hover {
+      transform: scale(1.05);
+    }
 
     &::after {
       content: '★';

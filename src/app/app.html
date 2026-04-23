@@ -3,3 +3,11 @@
   <router-outlet />
 </main>
 <app-footer />
+
+<!-- Scroll-to-top FAB -->
+<button type="button"
+        class="scroll-top-btn"
+        [class.scroll-top-btn--visible]="showScrollTop()"
+        (click)="scrollToTop()">
+  <span class="material-symbols-outlined">keyboard_arrow_up</span>
+</button>

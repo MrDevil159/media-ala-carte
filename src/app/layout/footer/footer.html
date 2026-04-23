@@ -1,4 +1,4 @@
-<footer class="site-footer">
+<footer id="footer" class="site-footer">
   <div class="footer-grid">
     <!-- Brand + social -->
     <div class="footer-brand">
@@ -8,9 +8,9 @@
       <p class="footer-brand__description">The Future Media Hub</p>
       <div class="footer-brand__social">
         @for (link of socialLinks(); track link.label) {
-          <a class="footer-brand__social-link" [href]="link.url">
+          <button type="button" class="footer-brand__social-link" (click)="$event.preventDefault()">
             <span class="material-symbols-outlined">{{ socialIcons[link.label] }}</span>
-          </a>
+          </button>
         }
       </div>
     </div>
@@ -22,9 +22,9 @@
         <ul class="footer-column__list">
           @for (link of column.links; track link.label) {
             <li>
-              <a class="footer-column__link" [routerLink]="link.path">
+              <button type="button" class="footer-column__link" (click)="scrollToTop()">
                 {{ link.label }}
-              </a>
+              </button>
             </li>
           }
         </ul>
@@ -45,7 +45,7 @@
         </div>
         <div class="footer-contact__row">
           <span class="material-symbols-outlined footer-contact__icon">mail</span>
-          <a class="footer-contact__email" [href]="'mailto:' + contactEmail()">{{ contactEmail() }}</a>
+          <span class="footer-contact__email">{{ contactEmail() }}</span>
         </div>
       </address>
     </div>

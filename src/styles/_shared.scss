@@ -31,6 +31,14 @@
   background-color: var(--color-surface-container-high);
   border: 1px solid var(--color-border);
   width: fit-content;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease;
+  cursor: default;
+
+  &:hover {
+    border-color: rgba(255, 139, 154, 0.4);
+    box-shadow: 0 4px 16px rgba(255, 139, 154, 0.15);
+    transform: translateY(-1px);
+  }
 
   &--primary {
     border-color: var(--color-primary);
