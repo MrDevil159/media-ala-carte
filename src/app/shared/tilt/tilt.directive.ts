@@ -14,6 +14,7 @@ export class TiltDirective implements OnDestroy {
 
   constructor() {
     afterNextRender(() => {
+      // Mouse Events
       fromEvent<MouseEvent>(this.el, 'mousemove')
         .pipe(takeUntil(this.destroy$))
         .subscribe(e => this.onMove(e));
@@ -21,16 +22,33 @@ export class TiltDirective implements OnDestroy {
       fromEvent<MouseEvent>(this.el, 'mouseleave')
         .pipe(takeUntil(this.destroy$))
         .subscribe(() => this.onLeave());
+
+      // Touch Events for Mobile
+      fromEvent<TouchEvent>(this.el, 'touchmove', { passive: true })
+        .pipe(takeUntil(this.destroy$))
+        .subscribe(e => this.onMove(e));
+
+      fromEvent<TouchEvent>(this.el, 'touchend')
+        .pipe(takeUntil(this.destroy$))
+        .subscribe(() => this.onLeave());
+
+      fromEvent<TouchEvent>(this.el, 'touchcancel')
+        .pipe(takeUntil(this.destroy$))
+        .subscribe(() => this.onLeave());
     });
   }
 
-  onMove(e: MouseEvent): void {
-    if (this.rafId || window.matchMedia('(hover: none), (prefers-reduced-motion: reduce)').matches) return;
+  onMove(e: MouseEvent | TouchEvent): void {
+    if (this.rafId || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+    const clientX = 'touches' in e ? e.touches[0].clientX : (e as MouseEvent).clientX;
+    const clientY = 'touches' in e ? e.touches[0].clientY : (e as MouseEvent).clientY;
+
     this.rafId = requestAnimationFrame(() => {
       this.rafId = 0;
       const rect = this.el.getBoundingClientRect();
-      const x = (e.clientX - (rect.left + rect.width / 2)) / (rect.width / 2);
-      const y = (e.clientY - (rect.top + rect.height / 2)) / (rect.height / 2);
+      const x = (clientX - (rect.left + rect.width / 2)) / (rect.width / 2);
+      const y = (clientY - (rect.top + rect.height / 2)) / (rect.height / 2);
       const m = this.max();
       const transform = `perspective(800px) rotateX(${-y * m}deg) rotateY(${x * m}deg) scale3d(1.02, 1.02, 1.02)`;
       this.renderer.setStyle(this.el, 'transform', transform);
