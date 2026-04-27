@@ -1,4 +1,10 @@
-import { afterNextRender, ChangeDetectionStrategy, Component, OnDestroy, signal } from '@angular/core';
+import {
+  afterNextRender,
+  ChangeDetectionStrategy,
+  Component,
+  OnDestroy,
+  signal,
+} from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { inject as injectAnalytics } from '@vercel/analytics';
 import { Header } from './layout/header/header';
@@ -27,7 +33,7 @@ export class App implements OnDestroy {
         mode: 'auto',
         debug: false,
       });
-      
+
       window.addEventListener('scroll', this.onScroll, { passive: true });
     });
   }
