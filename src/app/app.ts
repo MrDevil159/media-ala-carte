@@ -1,5 +1,6 @@
 import { afterNextRender, ChangeDetectionStrategy, Component, OnDestroy, signal } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
+import { inject as injectAnalytics } from '@vercel/analytics';
 import { Header } from './layout/header/header';
 import { Footer } from './layout/footer/footer';
 import { PageLoader } from './shared/page-loader/page-loader.directive';
@@ -21,6 +22,12 @@ export class App implements OnDestroy {
 
   constructor() {
     afterNextRender(() => {
+      // Initialize Vercel Web Analytics
+      injectAnalytics({
+        mode: 'auto',
+        debug: false,
+      });
+      
       window.addEventListener('scroll', this.onScroll, { passive: true });
     });
   }

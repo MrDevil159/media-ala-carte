@@ -23,6 +23,7 @@
     "@angular/ssr": "^21.2.7",
     "@types/express": "^5.0.6",
     "@types/node": "^25.6.0",
+    "@vercel/analytics": "^2.0.1",
     "express": "^5.2.1",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0"
